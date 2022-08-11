@@ -1,0 +1,23 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Press Start 2P", sans-serif; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  background: #777; }
+
+.title {
+  font-size: 6rem;
+  margin-top: 5rem;
+  text-align: center; }
+
+.vic {
+  font-size: 1rem;
+  margin: 2rem 30% 0 65%;
+  text-align: center; }
