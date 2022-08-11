@@ -46,9 +46,10 @@
   align-items: center;
 
   &-title {
+    // display: none;
     margin-top: 4rem;
-    font-size: 6rem;
-    display: inline-block;
+    font-size: 1px;
+    opacity: 0;
     color: transparent;
     background-image: $main-gradient;
     -webkit-background-clip: text;
@@ -56,6 +57,7 @@
     -webkit-text-stroke: 1px $color-black;
     background-size: 200%;
     background-position: -100%;
+    transition: all 3s;
     animation: wave 2s infinite, flow 3s ease infinite alternate-reverse;
   }
 }

@@ -2,8 +2,10 @@
 
 const playerTurnEl = document.querySelector(".player-toggle");
 const changeEl = document.querySelector(".change");
+const winnerEl = document.querySelector(".winner-title");
+let gameOver = false;
 
-// REMOVE AND KEEP DRY
+// FIND WAY TO REMOVE
 const row1col1 = document.querySelector(".row-one-col-one");
 const row1col2 = document.querySelector(".row-one-col-two");
 const row1col3 = document.querySelector(".row-one-col-three");
@@ -27,6 +29,13 @@ boxes.forEach((box) => {
   });
 });
 
+const winnerWinner = () => {
+  winnerEl.style.fontSize = "6rem";
+  winnerEl.style.opacity = "1";
+  console.log(`Player X is the winner`);
+  gameOver = false;
+};
+
 // CHANGE PLAYER TURN
 changeEl.addEventListener("click", () => {
   if (playerTurnEl.textContent === "X") {
@@ -43,7 +52,7 @@ const checkWinner = () => {
     row1col2.textContent === "X" &&
     row1col3.textContent === "X"
   ) {
-    console.log(`Player X is the winner`);
+    winnerWinner();
   }
 };
 
@@ -79,6 +88,7 @@ row1col2.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
 
 row1col3.addEventListener("click", () => {
@@ -93,6 +103,7 @@ row1col3.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
 
 row2col1.addEventListener("click", () => {

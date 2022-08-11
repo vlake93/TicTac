@@ -69,8 +69,8 @@ body {
   align-items: center; }
   .winner-title {
     margin-top: 4rem;
-    font-size: 6rem;
-    display: inline-block;
+    font-size: 1px;
+    opacity: 0;
     color: transparent;
     background-image: linear-gradient(to right, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
     -webkit-background-clip: text;
@@ -78,6 +78,7 @@ body {
     -webkit-text-stroke: 1px #000;
     background-size: 200%;
     background-position: -100%;
+    transition: all 3s;
     animation: wave 2s infinite, flow 3s ease infinite alternate-reverse; }
 
 .change {
