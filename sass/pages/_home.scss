@@ -5,6 +5,21 @@
   justify-content: center;
 }
 
+// ALL ROW AND COL
+.dry {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+}
+
+// ALL COL BUT ROW 1-2 only
+.dry-2 {
+  border-bottom: 5px solid black;
+}
+
 .row-one-col-one {
   cursor: pointer;
   display: grid;
