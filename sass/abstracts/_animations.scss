@@ -1,0 +1,25 @@
+@keyframes pulse {
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes wave {
+  40%,
+  50% {
+    transform: translate(32%, -10%) scale(1.05);
+  }
+
+  0%,
+  90%,
+  100% {
+    transform: translate(32%, -10%) scale(0.95);
+  }
+}
+
+@keyframes flow {
+  100% {
+    background-position: 200%;
+  }
+}

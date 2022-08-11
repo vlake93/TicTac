@@ -9,3 +9,47 @@
   margin: 2rem 30% 0 65%;
   text-align: center;
 }
+
+.player-turn {
+  font-size: 3rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.player-toggle {
+  font-size: 5rem;
+  -webkit-text-stroke: 0.01rem #fff;
+  position: relative;
+}
+
+.player-toggle::before,
+.player-toggle::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: -0.3rem;
+  border-radius: 50%;
+  z-index: -1;
+  background-image: $main-gradient;
+  animation: pulse 2s ease infinite;
+}
+
+.player-toggle::after {
+  animation: pulse 2s 0.5s ease infinite;
+}
+
+.winner {
+  margin-top: 4rem;
+  font-size: 5rem;
+  display: none;
+  color: transparent;
+  background-image: $main-gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1px black;
+  background-size: 200%;
+  background-position: -100%;
+  animation: wave 2s infinite, flow 3s ease infinite alternate-reverse;
+}

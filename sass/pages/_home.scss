@@ -1,0 +1,95 @@
+.tic-box {
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 20rem);
+  justify-content: center;
+}
+
+.row-one-col-one {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+}
+
+.row-one-col-two {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+}
+
+.row-one-col-three {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-bottom: 5px solid black;
+}
+
+.row-two-col-one {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+}
+.row-two-col-two {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+}
+.row-two-col-three {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-bottom: 5px solid black;
+}
+
+.row-three-col-one {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-right: 5px solid black;
+}
+.row-three-col-two {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+  border-right: 5px solid black;
+}
+.row-three-col-three {
+  cursor: pointer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  height: 20rem;
+}
