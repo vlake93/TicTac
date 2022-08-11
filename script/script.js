@@ -16,17 +16,28 @@ const row3col3 = document.querySelector(".row-three-col-three");
 
 const boxes = document.querySelectorAll(".box");
 
-// boxes.forEach((box) => {
-//   box.addEventListener("click", () => {
-//     if (playerTurnEl.textContent === "X") {
-//       playerTurnEl.textContent = "O";
-//     } else {
-//       playerTurnEl.textContent = "X";
-//     }
-//   });
-// });
+// USED TO CHECK IF BOXES/TILES HAVE VALUES AND DISABLE CHANGE PLAYER
+// STUDY THIS
+boxes.forEach((box) => {
+  box.addEventListener("click", () => {
+    if (boxes.textContent === "X" || "O") {
+      changeEl.style.opacity = "0";
+      changeEl.style.transform = "translateY(-20rem)";
+    }
+  });
+});
 
-const checkWinner = (test = "") => {
+// CHANGE PLAYER TURN
+changeEl.addEventListener("click", () => {
+  if (playerTurnEl.textContent === "X") {
+    playerTurnEl.textContent = "O";
+  } else {
+    playerTurnEl.textContent = "X";
+  }
+});
+
+// INCOMPLETE CHECK WINNERS
+const checkWinner = () => {
   if (
     row1col1.textContent === "X" &&
     row1col2.textContent === "X" &&
@@ -36,14 +47,11 @@ const checkWinner = (test = "") => {
   }
 };
 
-changeEl.addEventListener("click", () => {
-  if (playerTurnEl.textContent === "X") {
-    playerTurnEl.textContent = "O";
-  } else {
-    playerTurnEl.textContent = "X";
-  }
-});
+// Make a varaiable "gameOver" and set to false.
+// if gameOver = true, show `${player} is the winner!`
+// Show replay or restart
 
+// MAKE CODE SHORTER
 row1col1.addEventListener("click", () => {
   if (playerTurnEl.textContent === "X" && row1col1.textContent === "") {
     row1col1.textContent = "X";
@@ -54,7 +62,7 @@ row1col1.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row1col1.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
   checkWinner();
 });
@@ -69,7 +77,7 @@ row1col2.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row1col2.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });
 
@@ -83,7 +91,7 @@ row1col3.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row1col3.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });
 
@@ -97,7 +105,7 @@ row2col1.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row2col1.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });
 
@@ -111,7 +119,7 @@ row2col2.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row2col2.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });
 
@@ -125,7 +133,7 @@ row2col3.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row2col3.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });
 
@@ -139,7 +147,7 @@ row3col1.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row3col1.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });
 
@@ -153,7 +161,7 @@ row3col2.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row3col2.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });
 
@@ -167,6 +175,6 @@ row3col3.addEventListener("click", () => {
     playerTurnEl.textContent = "X";
     row3col3.style.cursor = "not-allowed";
   } else {
-    alert("Tile already taken");
+    console.log("Tile already taken");
   }
 });

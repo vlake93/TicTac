@@ -18,38 +18,44 @@
 
 .player-toggle {
   font-size: 5rem;
-  -webkit-text-stroke: 0.01rem #fff;
+  -webkit-text-stroke: 0.01rem $color-white;
   position: relative;
-}
 
-.player-toggle::before,
-.player-toggle::after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: -0.3rem;
-  border-radius: 50%;
-  z-index: -1;
-  background-image: $main-gradient;
-  animation: pulse 2s ease infinite;
-}
+  &::before,
+  &::after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: -0.3rem;
+    border-radius: 50%;
+    z-index: -1;
+    background-image: $main-gradient;
+    animation: pulse 2s ease infinite;
+  }
 
-.player-toggle::after {
-  animation: pulse 2s 0.5s ease infinite;
+  &::after {
+    animation: pulse 2s 0.5s ease infinite;
+  }
 }
 
 .winner {
-  margin-top: 4rem;
-  font-size: 5rem;
-  display: none;
-  color: transparent;
-  background-image: $main-gradient;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-stroke: 1px black;
-  background-size: 200%;
-  background-position: -100%;
-  animation: wave 2s infinite, flow 3s ease infinite alternate-reverse;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-title {
+    margin-top: 4rem;
+    font-size: 6rem;
+    display: inline-block;
+    color: transparent;
+    background-image: $main-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px $color-black;
+    background-size: 200%;
+    background-position: -100%;
+    animation: wave 2s infinite, flow 3s ease infinite alternate-reverse;
+  }
 }

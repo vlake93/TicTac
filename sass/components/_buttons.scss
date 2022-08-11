@@ -1,9 +1,9 @@
 .change {
   margin: 0 auto;
-  display: inline-block;
+  display: block;
   width: 10rem;
   height: 4rem;
   border: 2px solid black;
   cursor: pointer;
-  transition: all 1s;
+  transition: opacity 0.5s, transform 4s;
 }

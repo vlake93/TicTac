@@ -17,7 +17,7 @@
 
 // ALL COL BUT ROW 1-2 only
 .dry-2 {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid $color-black;
 }
 
 .row-one-col-one {
@@ -27,8 +27,8 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-bottom: 5px solid black;
-  border-right: 5px solid black;
+  border-bottom: 5px solid $color-black;
+  border-right: 5px solid $color-black;
 }
 
 .row-one-col-two {
@@ -38,8 +38,8 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-bottom: 5px solid black;
-  border-right: 5px solid black;
+  border-bottom: 5px solid $color-black;
+  border-right: 5px solid $color-black;
 }
 
 .row-one-col-three {
@@ -49,7 +49,7 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid $color-black;
 }
 
 .row-two-col-one {
@@ -59,8 +59,8 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-bottom: 5px solid black;
-  border-right: 5px solid black;
+  border-bottom: 5px solid $color-black;
+  border-right: 5px solid $color-black;
 }
 .row-two-col-two {
   cursor: pointer;
@@ -69,8 +69,8 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-bottom: 5px solid black;
-  border-right: 5px solid black;
+  border-bottom: 5px solid $color-black;
+  border-right: 5px solid $color-black;
 }
 .row-two-col-three {
   cursor: pointer;
@@ -79,7 +79,7 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid $color-black;
 }
 
 .row-three-col-one {
@@ -89,7 +89,7 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-right: 5px solid black;
+  border-right: 5px solid $color-black;
 }
 .row-three-col-two {
   cursor: pointer;
@@ -98,7 +98,7 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  border-right: 5px solid black;
+  border-right: 5px solid $color-black;
 }
 .row-three-col-three {
   cursor: pointer;
