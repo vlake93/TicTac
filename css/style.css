@@ -34,7 +34,8 @@ body {
   font-size: 6rem;
   margin-top: 5rem;
   text-align: center;
-  position: relative; }
+  position: relative;
+  text-transform: uppercase; }
   .title::after {
     content: "by Vic";
     font-size: 1rem;
@@ -87,6 +88,7 @@ body {
 
 .button {
   margin-top: 2rem;
+  margin-bottom: 3rem;
   display: flex;
   justify-content: center; }
   .button-restart {
@@ -106,21 +108,21 @@ body {
       transform: scale(1);
       box-shadow: none; }
   .button-change {
+    margin-right: 3rem;
     display: block;
     width: 10rem;
     height: 4rem;
     border: 2px solid #000;
     text-transform: uppercase;
     cursor: pointer;
-    transition: opacity 0.5s, transform 4s; }
+    transition: opacity 0.5s, transform 4s, scale 0.3s, box-shadow 0.3s; }
     .button-change:hover {
-      transform: scale(1.1);
+      scale: 1.1;
       box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.5); }
     .button-change:active {
-      transform: scale(1);
+      scale: 1;
       box-shadow: none; }
   .button-replay {
-    margin-left: 10rem;
     display: block;
     width: 10rem;
     height: 4rem;
@@ -128,6 +130,12 @@ body {
     text-transform: uppercase;
     opacity: 0;
     transition: opacity 2s; }
+
+.replay {
+  display: flex; }
+  .replay-next, .replay-previous {
+    height: 4rem;
+    cursor: pointer; }
 
 .tic-box {
   margin-top: 5rem;
