@@ -2,12 +2,15 @@
   font-size: 6rem;
   margin-top: 5rem;
   text-align: center;
-}
+  position: relative;
 
-.vic {
-  font-size: 1rem;
-  margin: 2rem 30% 0 65%;
-  text-align: center;
+  &::after {
+    content: "by Vic";
+    font-size: 1rem;
+    position: absolute;
+    top: 6.5rem;
+    right: 32%;
+  }
 }
 
 .player-turn {
@@ -28,7 +31,7 @@
     width: 100%;
     position: absolute;
     top: 0;
-    left: -0.3rem;
+    left: -0.5rem;
     border-radius: 50%;
     z-index: -1;
     background-image: $main-gradient;
@@ -44,6 +47,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   &-title {
     // display: none;
@@ -59,5 +63,6 @@
     background-position: -100%;
     transition: all 3s;
     animation: wave 2s infinite, flow 3s ease infinite alternate-reverse;
+    animation-delay: 1s;
   }
 }

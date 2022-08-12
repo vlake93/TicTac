@@ -6,7 +6,15 @@
 }
 
 // ALL ROW AND COL
-.dry {
+.row-one-col-one,
+.row-one-col-two,
+.row-one-col-three,
+.row-two-col-one,
+.row-two-col-two,
+.row-two-col-three,
+.row-three-col-one,
+.row-three-col-two,
+.row-three-col-three {
   cursor: pointer;
   display: grid;
   justify-content: center;
@@ -16,95 +24,34 @@
 }
 
 // ALL COL BUT ROW 1-2 only
-.dry-2 {
-  border-bottom: 5px solid $color-black;
+.row-one-col-one,
+.row-one-col-two,
+.row-one-col-three,
+.row-two-col-one,
+.row-two-col-two,
+.row-two-col-three {
+  border-bottom: $default-border;
 }
 
 .row-one-col-one {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-bottom: 5px solid $color-black;
-  border-right: 5px solid $color-black;
+  border-right: $default-border;
 }
 
 .row-one-col-two {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-bottom: 5px solid $color-black;
-  border-right: 5px solid $color-black;
-}
-
-.row-one-col-three {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-bottom: 5px solid $color-black;
+  border-right: $default-border;
 }
 
 .row-two-col-one {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-bottom: 5px solid $color-black;
-  border-right: 5px solid $color-black;
+  border-right: $default-border;
 }
+
 .row-two-col-two {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-bottom: 5px solid $color-black;
-  border-right: 5px solid $color-black;
-}
-.row-two-col-three {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-bottom: 5px solid $color-black;
+  border-right: $default-border;
 }
 
 .row-three-col-one {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-right: 5px solid $color-black;
+  border-right: $default-border;
 }
 .row-three-col-two {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
-  border-right: 5px solid $color-black;
-}
-.row-three-col-three {
-  cursor: pointer;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  height: 20rem;
+  border-right: $default-border;
 }

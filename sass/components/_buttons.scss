@@ -1,9 +1,59 @@
-.change {
-  margin: 0 auto;
-  display: block;
-  width: 10rem;
-  height: 4rem;
-  border: 2px solid black;
-  cursor: pointer;
-  transition: opacity 0.5s, transform 4s;
+.button {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+
+  &-restart {
+    margin-right: 10rem;
+    opacity: 0;
+    transition: opacity 2s;
+    width: $button-width;
+    height: $button-height;
+    border: $button-border;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 2s, transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 10px 3px rgba($color-black, $alpha: 0.5);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: none;
+    }
+  }
+
+  &-change {
+    display: block;
+    width: $button-width;
+    height: $button-height;
+    border: $button-border;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.5s, transform 4s;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 10px 3px rgba($color-black, $alpha: 0.5);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: none;
+    }
+  }
+
+  &-replay {
+    margin-left: 10rem;
+    display: block;
+    width: $button-width;
+    height: $button-height;
+    border: $button-border;
+    text-transform: uppercase;
+    // cursor: pointer;
+    opacity: 0;
+    transition: opacity 2s;
+  }
 }

@@ -1,11 +1,20 @@
 "use strict";
 
+const gameContainer = document.querySelector(".tic-box");
+const boxes = document.querySelectorAll(".box");
+
+// HEADERS
 const playerTurnEl = document.querySelector(".player-toggle");
-const changeEl = document.querySelector(".change");
 const winnerEl = document.querySelector(".winner-title");
+const winner = document.querySelector(".winner-player");
+
+// BUTTONS
+const changeEl = document.querySelector(".button-change");
+const restartEl = document.querySelector(".button-restart");
+const replayEl = document.querySelector(".button-replay");
 let gameOver = false;
 
-// FIND WAY TO REMOVE
+// FIND WAY TO REMOVE/SHORTEN
 const row1col1 = document.querySelector(".row-one-col-one");
 const row1col2 = document.querySelector(".row-one-col-two");
 const row1col3 = document.querySelector(".row-one-col-three");
@@ -15,8 +24,6 @@ const row2col3 = document.querySelector(".row-two-col-three");
 const row3col1 = document.querySelector(".row-three-col-one");
 const row3col2 = document.querySelector(".row-three-col-two");
 const row3col3 = document.querySelector(".row-three-col-three");
-
-const boxes = document.querySelectorAll(".box");
 
 // USED TO CHECK IF BOXES/TILES HAVE VALUES AND DISABLE CHANGE PLAYER
 // STUDY THIS
@@ -29,11 +36,21 @@ boxes.forEach((box) => {
   });
 });
 
+// DECLARES WINNER AND DISABLES BOARD
 const winnerWinner = () => {
+  if (playerTurnEl.textContent === "X") {
+    playerTurnEl.textContent === "O";
+  } else {
+    playerTurnEl.textContent === "X";
+  }
+  winner.textContent = playerTurnEl.textContent;
+  console.log(`Player ${playerTurnEl.textContent} is the winner`);
+  restartEl.style.opacity = "1";
   winnerEl.style.fontSize = "6rem";
   winnerEl.style.opacity = "1";
-  console.log(`Player X is the winner`);
-  gameOver = false;
+  replayEl.style.opacity = "1";
+  gameContainer.style.pointerEvents = "none";
+  gameOver = true;
 };
 
 // CHANGE PLAYER TURN
@@ -45,22 +62,84 @@ changeEl.addEventListener("click", () => {
   }
 });
 
-// INCOMPLETE CHECK WINNERS
+// FIND WAY TO SHORTEN
 const checkWinner = () => {
   if (
-    row1col1.textContent === "X" &&
-    row1col2.textContent === "X" &&
-    row1col3.textContent === "X"
+    (row1col1.textContent === "X" &&
+      row1col2.textContent === "X" &&
+      row1col3.textContent === "X") ||
+    (row1col1.textContent === "O" &&
+      row1col2.textContent === "O" &&
+      row1col3.textContent === "O")
+  ) {
+    winnerWinner();
+  } else if (
+    (row2col1.textContent === "X" &&
+      row2col2.textContent === "X" &&
+      row2col3.textContent === "X") ||
+    (row2col1.textContent === "O" &&
+      row2col2.textContent === "O" &&
+      row2col3.textContent === "O")
+  ) {
+    winnerWinner();
+  } else if (
+    (row3col1.textContent === "X" &&
+      row3col2.textContent === "X" &&
+      row3col3.textContent === "X") ||
+    (row3col1.textContent === "O" &&
+      row3col2.textContent === "O" &&
+      row3col3.textContent === "O")
+  ) {
+    winnerWinner();
+  } else if (
+    (row1col1.textContent === "X" &&
+      row2col1.textContent === "X" &&
+      row3col1.textContent === "X") ||
+    (row1col1.textContent === "O" &&
+      row2col1.textContent === "O" &&
+      row3col1.textContent === "O")
+  ) {
+    winnerWinner();
+  } else if (
+    (row1col2.textContent === "X" &&
+      row2col2.textContent === "X" &&
+      row3col2.textContent === "X") ||
+    (row1col2.textContent === "O" &&
+      row2col2.textContent === "O" &&
+      row3col2.textContent === "O")
+  ) {
+    winnerWinner();
+  } else if (
+    (row1col3.textContent === "X" &&
+      row2col3.textContent === "X" &&
+      row3col3.textContent === "X") ||
+    (row1col3.textContent === "O" &&
+      row2col3.textContent === "O" &&
+      row3col3.textContent === "O")
+  ) {
+    winnerWinner();
+  } else if (
+    (row1col1.textContent === "X" &&
+      row2col2.textContent === "X" &&
+      row3col3.textContent === "X") ||
+    (row1col1.textContent === "O" &&
+      row2col2.textContent === "O" &&
+      row3col3.textContent === "O")
+  ) {
+    winnerWinner();
+  } else if (
+    (row1col3.textContent === "X" &&
+      row2col2.textContent === "X" &&
+      row3col1.textContent === "X") ||
+    (row1col3.textContent === "O" &&
+      row2col2.textContent === "O" &&
+      row3col1.textContent === "O")
   ) {
     winnerWinner();
   }
 };
 
-// Make a varaiable "gameOver" and set to false.
-// if gameOver = true, show `${player} is the winner!`
-// Show replay or restart
-
-// MAKE CODE SHORTER
+// FIND WAY TO SHORTEN
 row1col1.addEventListener("click", () => {
   if (playerTurnEl.textContent === "X" && row1col1.textContent === "") {
     row1col1.textContent = "X";
@@ -118,6 +197,7 @@ row2col1.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
 
 row2col2.addEventListener("click", () => {
@@ -132,6 +212,7 @@ row2col2.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
 
 row2col3.addEventListener("click", () => {
@@ -146,6 +227,7 @@ row2col3.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
 
 row3col1.addEventListener("click", () => {
@@ -160,6 +242,7 @@ row3col1.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
 
 row3col2.addEventListener("click", () => {
@@ -174,6 +257,7 @@ row3col2.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
 
 row3col3.addEventListener("click", () => {
@@ -188,4 +272,5 @@ row3col3.addEventListener("click", () => {
   } else {
     console.log("Tile already taken");
   }
+  checkWinner();
 });
