@@ -7,11 +7,15 @@ const boxes = document.querySelectorAll(".box");
 const playerTurnEl = document.querySelector(".player-toggle");
 const winnerEl = document.querySelector(".winner-title");
 const winner = document.querySelector(".winner-player");
+const buttons = document.querySelector(".button");
 
 // BUTTONS
 const changeEl = document.querySelector(".button-change");
 const restartEl = document.querySelector(".button-restart");
 const replayEl = document.querySelector(".button-replay");
+const nextEl = document.querySelector(".replay-next");
+const previousEl = document.querySelector(".replay-previous");
+
 let gameOver = false;
 
 // FIND WAY TO REMOVE/SHORTEN
@@ -36,6 +40,8 @@ boxes.forEach((box) => {
   });
 });
 
+// MAKE RESTART BUTTON WORK
+
 // DECLARES WINNER AND DISABLES BOARD
 const winnerWinner = () => {
   if (playerTurnEl.textContent === "X") {
@@ -49,6 +55,7 @@ const winnerWinner = () => {
   winnerEl.style.fontSize = "6rem";
   winnerEl.style.opacity = "1";
   replayEl.style.opacity = "1";
+  buttons.style.opacity = "1";
   gameContainer.style.pointerEvents = "none";
   gameOver = true;
 };

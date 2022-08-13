@@ -3,6 +3,7 @@
   margin-bottom: 3rem;
   display: flex;
   justify-content: center;
+  transition: all 2s;
 
   &-restart {
     margin-right: 10rem;
@@ -13,7 +14,7 @@
     border: $button-border;
     text-transform: uppercase;
     cursor: pointer;
-    transition: opacity 2s, transform 0.3s, box-shadow 0.3s;
+    transition: opacity 0.5s, transform 0.3s, box-shadow 0.3s;
 
     &:hover {
       transform: scale(1.1);
@@ -27,6 +28,7 @@
   }
 
   &-change {
+    opacity: 1;
     margin-right: 3rem;
     display: block;
     width: $button-width;
@@ -53,19 +55,28 @@
     height: $button-height;
     border: $button-border;
     text-transform: uppercase;
-    // cursor: pointer;
-    opacity: 0;
-    transition: opacity 2s;
   }
 }
 
 .replay {
   display: flex;
-  // margin-left: 3rem;
+  opacity: 0;
 
   &-next,
   &-previous {
     height: 4rem;
     cursor: pointer;
+    transition: all 1s;
+  }
+
+  &-next {
+    margin-left: 2rem;
+  }
+  &-previous {
+    margin-right: 2rem;
+  }
+
+  &-next:hover {
+    transform: scale(1.5);
   }
 }
