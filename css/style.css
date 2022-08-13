@@ -33,9 +33,6 @@
 html {
   font-size: 62.5%; }
 
-body {
-  background: url(../../assets/cyberpunk.jpg); }
-
 .title {
   font-size: 6rem;
   margin-top: 5rem;
@@ -183,7 +180,7 @@ body {
     width: 100vw;
     object-fit: cover; }
 
-.tic-box {
+.board {
   color: #fff;
   margin-top: 5rem;
   display: grid;
