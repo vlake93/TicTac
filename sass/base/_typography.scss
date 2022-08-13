@@ -59,17 +59,28 @@
     background-image: $main-gradient;
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-stroke: 1px $color-black;
+    -webkit-text-stroke: 0.1px $color-black;
     background-size: 200%;
     background-position: -100%;
     transition: all 3s;
-    animation: wave 2s infinite, flow 3s ease infinite alternate-reverse;
+    animation: neon 1s infinite, flow 3s ease infinite alternate-reverse;
     animation-delay: 1s;
   }
 }
 
-.neonText {
+.neon-green {
   color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
     0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+}
+
+.neon-blue {
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+}
+
+.neon-one {
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe,
+    0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe;
 }

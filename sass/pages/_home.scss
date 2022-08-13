@@ -1,3 +1,7 @@
+.bg-video {
+  position: absolute;
+}
+
 .tic-box {
   margin-top: 5rem;
   display: grid;
@@ -21,6 +25,9 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff,
+    0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff;
+  animation: neon 1.5s infinite alternate;
 }
 
 // ALL COL BUT ROW 1-2 only
@@ -30,28 +37,28 @@
 .row-two-col-one,
 .row-two-col-two,
 .row-two-col-three {
-  border-bottom: $default-border;
+  border-bottom: 2px solid transparent;
 }
 
 .row-one-col-one {
-  border-right: $default-border;
+  border-right: transparent;
 }
 
 .row-one-col-two {
-  border-right: $default-border;
+  border-right: transparent;
 }
 
 .row-two-col-one {
-  border-right: $default-border;
+  border-right: transparent;
 }
 
 .row-two-col-two {
-  border-right: $default-border;
+  border-right: transparent;
 }
 
 .row-three-col-one {
-  border-right: $default-border;
+  border-right: transparent;
 }
 .row-three-col-two {
-  border-right: $default-border;
+  border-right: transparent;
 }

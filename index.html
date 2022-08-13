@@ -20,8 +20,11 @@
     <title>Tic Tac Toe by Vic</title>
   </head>
   <body>
-    <h1 class="title neonText">tic-tac-toe</h1>
-    <h2 class="player-turn neonText">
+    <video class="bg-image" src="">
+      <source src="/assets/" />
+    </video>
+    <h1 class="title neon-blue">tic-tac-toe</h1>
+    <h2 class="player-turn neon-green">
       Turn of player: <span class="player-toggle">X</span>
     </h2>
     <div class="player-holder">
@@ -29,23 +32,15 @@
         <button class="button-restart">play again</button>
         <button class="button-change" type="button">change player</button>
         <div class="replay">
-          <img
-            class="replay-previous"
-            src="assets/left.png"
-            alt="Chevron left logo"
-          />
+          <p class="replay-previous neon-blue"><</p>
           <button class="button-replay">replay</button>
-          <img
-            class="replay-next"
-            src="assets/right.png"
-            alt="Chevron right logo"
-          />
+          <p class="replay-next neon-blue">></p>
         </div>
       </div>
     </div>
 
     <div class="tic-box">
-      <div class="box row-one-col-one"></div>
+      <div class="box row-one-col-one neonText"></div>
       <div class="box row-one-col-two"></div>
       <div class="box row-one-col-three"></div>
       <div class="box row-two-col-one"></div>

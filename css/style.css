@@ -16,6 +16,12 @@
   100% {
     background-position: 200%; } }
 
+@keyframes neon {
+  100% {
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe, 0 0 90px #bc13fe, 0 0 100px #bc13fe, 0 0 150px #bc13fe; }
+  0% {
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #bc13fe, 0 0 45px #bc13fe, 0 0 55px #bc13fe, 0 0 70px #bc13fe, 0 0 80px #bc13fe; } }
+
 *,
 *::before,
 *::after {
@@ -28,7 +34,7 @@ html {
   font-size: 62.5%; }
 
 body {
-  background: #777; }
+  background: url(../../assets/cyberpunk.jpg); }
 
 .title {
   font-size: 6rem;
@@ -79,16 +85,23 @@ body {
     background-image: linear-gradient(to right, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-stroke: 1px #000;
+    -webkit-text-stroke: 0.1px #000;
     background-size: 200%;
     background-position: -100%;
     transition: all 3s;
-    animation: wave 2s infinite, flow 3s ease infinite alternate-reverse;
+    animation: neon 1s infinite, flow 3s ease infinite alternate-reverse;
     animation-delay: 1s; }
 
-.neonText {
+.neon-green {
   color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; }
+
+.neon-blue {
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; }
+
+.neon-one {
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe, 0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe; }
 
 .button {
   margin-top: 2rem;
@@ -97,57 +110,68 @@ body {
   justify-content: center;
   transition: all 2s; }
   .button-restart {
+    color: #fff;
     margin-right: 10rem;
     opacity: 0;
     transition: opacity 2s;
     width: 10rem;
     height: 4rem;
-    border: 2px solid #000;
+    border: 2px solid #fff;
     text-transform: uppercase;
     cursor: pointer;
-    transition: opacity 0.5s, transform 0.3s, box-shadow 0.3s; }
+    background-color: transparent;
+    transition: opacity 0.5s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff; }
     .button-restart:hover {
-      transform: scale(1.1);
-      box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.5); }
+      transform: scale(1.1); }
     .button-restart:active {
       transform: scale(1);
       box-shadow: none; }
   .button-change {
+    margin-left: 5rem;
+    color: #fff;
     opacity: 1;
-    margin-right: 3rem;
     display: block;
     width: 10rem;
     height: 4rem;
-    border: 2px solid #000;
+    border: 2px solid #fff;
     text-transform: uppercase;
     cursor: pointer;
-    transition: opacity 0.5s, transform 4s, scale 0.3s, box-shadow 0.3s; }
+    background-color: transparent;
+    transition: opacity 0.5s, transform 2s, box-shadow 0.3s, scale 0.3s;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff; }
     .button-change:hover {
-      scale: 1.1;
-      box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.5); }
+      scale: 1.1; }
     .button-change:active {
       scale: 1;
       box-shadow: none; }
   .button-replay {
-    display: block;
+    color: #fff;
     width: 10rem;
     height: 4rem;
-    border: 2px solid #000;
-    text-transform: uppercase; }
+    border: 2px solid #fff;
+    text-transform: uppercase;
+    background-color: transparent;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff; }
 
 .replay {
   display: flex;
-  opacity: 0; }
+  opacity: 0;
+  transition: opacity 1s; }
   .replay-next, .replay-previous {
-    height: 4rem;
+    font-size: 4rem;
     cursor: pointer;
-    transition: all 1s; }
+    transition: all 0.5s; }
   .replay-next {
     margin-left: 2rem; }
   .replay-previous {
-    margin-right: 2rem; }
-  .replay-next:hover {
-    transform: scale(1.5); }
+    margin-right: 2rem;
+    margin-left: 4rem; }
+  .replay-next:hover, .replay-previous:hover {
+    transform: scale(1.2); }
+
+.bg-video {
+  position: absolute; }
 
 .tic-box {
   margin-top: 5rem;
@@ -169,7 +193,9 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 10rem;
-  height: 20rem; }
+  height: 20rem;
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff;
+  animation: neon 1.5s infinite alternate; }
 
 .row-one-col-one,
 .row-one-col-two,
@@ -177,22 +203,22 @@ body {
 .row-two-col-one,
 .row-two-col-two,
 .row-two-col-three {
-  border-bottom: 5px solid #000; }
+  border-bottom: 2px solid transparent; }
 
 .row-one-col-one {
-  border-right: 5px solid #000; }
+  border-right: transparent; }
 
 .row-one-col-two {
-  border-right: 5px solid #000; }
+  border-right: transparent; }
 
 .row-two-col-one {
-  border-right: 5px solid #000; }
+  border-right: transparent; }
 
 .row-two-col-two {
-  border-right: 5px solid #000; }
+  border-right: transparent; }
 
 .row-three-col-one {
-  border-right: 5px solid #000; }
+  border-right: transparent; }
 
 .row-three-col-two {
-  border-right: 5px solid #000; }
+  border-right: transparent; }
