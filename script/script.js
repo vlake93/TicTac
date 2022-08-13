@@ -55,7 +55,6 @@ const winnerWinner = () => {
   winnerEl.style.fontSize = "6rem";
   winnerEl.style.opacity = "1";
   replayEl.style.opacity = "1";
-  re.style.opacity = "1";
   gameContainer.style.pointerEvents = "none";
   gameOver = true;
 };
