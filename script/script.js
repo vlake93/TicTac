@@ -14,11 +14,10 @@ const nextEl = document.querySelector(".replay-next");
 const previousEl = document.querySelector(".replay-previous");
 
 let currentPlayer = ["X", "O"];
-
 let board = [
-  [0, 0, 0],
-  [0, 0, 0],
-  [0, 0, 0],
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""],
 ];
 
 changeEl.addEventListener("click", () => {
@@ -64,12 +63,14 @@ const chickenDinner = () => {
     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
     if (
-      board[0].indexOf(0) === -1 &&
-      board[1].indexOf(0) === -1 &&
-      board[2].indexOf(0) === -1
+      board[0].indexOf("") === -1 &&
+      board[1].indexOf("") === -1 &&
+      board[2].indexOf("") === -1
     ) {
       tieEl.style.opacity = "1";
       tieEl.style.fontSize = "6rem";
+      restartEl.style.opacity = "1";
+      replayEl.style.opacity = "1";
       console.log("It's a tie");
     } else if (row === "XXX" || col === "XXX") {
       winnerWinner();
@@ -89,11 +90,24 @@ const winnerWinner = () => {
   } else if (playerTurnEl.textContent === "O") {
     winner.textContent = currentPlayer[0];
   }
-  restartEl.style.opacity = "1";
   winnerEl.style.fontSize = "6rem";
   winnerEl.style.opacity = "1";
+  restartEl.style.opacity = "1";
   replayEl.style.opacity = "1";
   gameContainer.style.pointerEvents = "none";
+};
+
+const restart = () => {
+  restartEl.addEventListener("click", () => {
+    board = [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ];
+    boxes.forEach((box) => {
+      box.textContent = "";
+    });
+  });
 };
 
 // FIND WAY TO REMOVE/SHORTEN
