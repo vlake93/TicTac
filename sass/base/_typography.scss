@@ -46,24 +46,25 @@
 
 .winner {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
 
-  &-title {
-    margin-top: 4rem;
+  &-win,
+  &-draw {
+    font-size: 1px;
     font-size: 1px;
     opacity: 0;
-    color: transparent;
-    background-image: $main-gradient;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-stroke: 0.1px $color-black;
-    background-size: 200%;
-    background-position: -100%;
+    opacity: 0;
     transition: all 3s;
-    animation: neonPink 1s infinite, flow 3s ease infinite alternate-reverse;
-    animation-delay: 1s;
+    animation: neonPink 1s infinite;
+    color: transparent;
+    -webkit-text-stroke: 0.1px $color-black;
+  }
+
+  &-win {
+    margin-top: 4rem;
   }
 }
 

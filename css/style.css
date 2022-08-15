@@ -12,10 +12,6 @@
   100% {
     transform: scale(0.95); } }
 
-@keyframes flow {
-  100% {
-    background-position: 200%; } }
-
 @keyframes neonPink {
   100% {
     text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe, 0 0 90px #bc13fe, 0 0 100px #bc13fe, 0 0 150px #bc13fe; }
@@ -83,23 +79,21 @@ html {
 
 .winner {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative; }
-  .winner-title {
-    margin-top: 4rem;
+  .winner-win, .winner-draw {
+    font-size: 1px;
     font-size: 1px;
     opacity: 0;
-    color: transparent;
-    background-image: linear-gradient(to right, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-stroke: 0.1px #000;
-    background-size: 200%;
-    background-position: -100%;
+    opacity: 0;
     transition: all 3s;
-    animation: neonPink 1s infinite, flow 3s ease infinite alternate-reverse;
-    animation-delay: 1s; }
+    animation: neonPink 1s infinite;
+    color: transparent;
+    -webkit-text-stroke: 0.1px #000; }
+  .winner-win {
+    margin-top: 4rem; }
 
 .neon-green {
   color: #fff;

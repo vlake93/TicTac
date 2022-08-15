@@ -2,14 +2,11 @@
 
 const boxes = document.querySelectorAll(".box");
 const gameContainer = document.querySelector(".board");
-
-// HEADERS
 const playerTurnEl = document.querySelector(".player-toggle");
-const winnerEl = document.querySelector(".winner-title");
+const winnerEl = document.querySelector(".winner-win");
+const tieEl = document.querySelector(".winner-draw");
 const winner = document.querySelector(".winner-player");
 const buttons = document.querySelector(".button");
-
-// BUTTONS
 const changeEl = document.querySelector(".button-change");
 const restartEl = document.querySelector(".button-restart");
 const replayEl = document.querySelector(".replay");
@@ -24,7 +21,6 @@ let board = [
   [0, 0, 0],
 ];
 
-// CHANGE PLAYER
 changeEl.addEventListener("click", () => {
   if (playerTurnEl.textContent === "X") {
     playerTurnEl.textContent = "O";
@@ -34,7 +30,6 @@ changeEl.addEventListener("click", () => {
   }
 });
 
-// USED TO CHECK IF BOXES/TILES HAVE VALUES AND DISABLE CHANGE PLAYER BUTTON THEN CHECKS FOR WINNER EACH MOVE
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
     saveData(index);
@@ -55,12 +50,12 @@ boxes.forEach((box, index) => {
   });
 });
 
-function saveData(index) {
+const saveData = (index) => {
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
   console.log(board);
-}
+};
 
 const chickenDinner = () => {
   for (let i = 0; i < 3; i++) {
@@ -73,6 +68,8 @@ const chickenDinner = () => {
       board[1].indexOf(0) === -1 &&
       board[2].indexOf(0) === -1
     ) {
+      tieEl.style.opacity = "1";
+      tieEl.style.fontSize = "6rem";
       console.log("It's a tie");
     } else if (row === "XXX" || col === "XXX") {
       winnerWinner();
@@ -86,7 +83,6 @@ const chickenDinner = () => {
   }
 };
 
-// DECLARES WINNER AND DISABLES BOARD
 const winnerWinner = () => {
   if (playerTurnEl.textContent === "X") {
     winner.textContent = currentPlayer[1];
