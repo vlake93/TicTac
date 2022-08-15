@@ -62,14 +62,19 @@ function saveData(index) {
   console.log(board);
 }
 
-// CHECKS FOR WINNING BOARD FORMATION
 const chickenDinner = () => {
   for (let i = 0; i < 3; i++) {
     let row = board[i][0] + board[i][1] + board[i][2];
     let col = board[0][i] + board[1][i] + board[2][i];
     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
-    if (row === "XXX" || col === "XXX") {
+    if (
+      board[0].indexOf(0) === -1 &&
+      board[1].indexOf(0) === -1 &&
+      board[2].indexOf(0) === -1
+    ) {
+      console.log("It's a tie");
+    } else if (row === "XXX" || col === "XXX") {
       winnerWinner();
     } else if (row === "OOO" || col === "OOO") {
       winnerWinner();
