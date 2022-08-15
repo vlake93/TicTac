@@ -51,7 +51,6 @@
   position: relative;
 
   &-title {
-    // display: none;
     margin-top: 4rem;
     font-size: 1px;
     opacity: 0;
@@ -63,24 +62,22 @@
     background-size: 200%;
     background-position: -100%;
     transition: all 3s;
-    animation: neon 1s infinite, flow 3s ease infinite alternate-reverse;
+    animation: neonPink 1s infinite, flow 3s ease infinite alternate-reverse;
     animation-delay: 1s;
   }
 }
 
 .neon-green {
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+  text-shadow: $shadow-text-green;
 }
 
 .neon-blue {
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+  text-shadow: $shadow-text-blue;
 }
 
-.neon-one {
-  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe,
-    0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe;
+.neon-red {
+  color: $color-white;
+  text-shadow: $shadow-text-red;
 }

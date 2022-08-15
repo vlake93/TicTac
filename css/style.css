@@ -16,11 +16,23 @@
   100% {
     background-position: 200%; } }
 
-@keyframes neon {
+@keyframes neonPink {
   100% {
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe, 0 0 90px #bc13fe, 0 0 100px #bc13fe, 0 0 150px #bc13fe; }
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe, 0 0 90px #bc13fe, 0 0 100px #bc13fe, 0 0 150px #bc13fe; }
   0% {
-    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #bc13fe, 0 0 45px #bc13fe, 0 0 55px #bc13fe, 0 0 70px #bc13fe, 0 0 80px #bc13fe; } }
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #bc13fe, 0 0 45px #bc13fe, 0 0 55px #bc13fe, 0 0 70px #bc13fe, 0 0 80px #bc13fe; } }
+
+@keyframes neonBlue {
+  100% {
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #2e89ff, 0 0 80px #2e89ff, 0 0 90px #2e89ff, 0 0 100px #2e89ff, 0 0 150px #2e89ff; }
+  0% {
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #2e89ff, 0 0 45px #2e89ff, 0 0 55px #2e89ff, 0 0 70px #2e89ff, 0 0 80px #2e89ff; } }
+
+@keyframes neonRed {
+  100% {
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #ff0217, 0 0 80px #ff0217, 0 0 90px #ff0217, 0 0 100px #ff0217, 0 0 150px #ff0217; }
+  0% {
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #ff0217, 0 0 45px #ff0217, 0 0 55px #ff0217, 0 0 70px #ff0217, 0 0 80px #ff0217; } }
 
 *,
 *::before,
@@ -86,19 +98,20 @@ html {
     background-size: 200%;
     background-position: -100%;
     transition: all 3s;
-    animation: neon 1s infinite, flow 3s ease infinite alternate-reverse;
+    animation: neonPink 1s infinite, flow 3s ease infinite alternate-reverse;
     animation-delay: 1s; }
 
 .neon-green {
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; }
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; }
 
 .neon-blue {
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; }
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #2e89ff, 0 0 82px #2e89ff, 0 0 92px #2e89ff, 0 0 102px #2e89ff, 0 0 151px #2e89ff; }
 
-.neon-one {
-  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe, 0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe; }
+.neon-red {
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #ff0217, 0 0 82px #ff0217, 0 0 92px #ff0217, 0 0 102px #ff0217, 0 0 151px #ff0217; }
 
 .button {
   margin-top: 2rem;
@@ -106,19 +119,20 @@ html {
   display: flex;
   justify-content: center;
   transition: all 2s; }
-  .button-restart {
+  .button-restart, .button-change, .button-replay {
     color: #fff;
-    margin-left: 6rem;
-    opacity: 0;
-    transition: opacity 2s;
     width: 10rem;
     height: 4rem;
     border: 2px solid #fff;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff;
     text-transform: uppercase;
+    background-color: transparent; }
+  .button-restart {
+    margin-left: 6rem;
+    opacity: 0;
+    transition: opacity 2s;
     cursor: pointer;
-    background-color: transparent;
-    transition: opacity 0.5s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff; }
+    transition: opacity 0.5s, transform 0.3s, box-shadow 0.3s; }
     .button-restart:hover {
       transform: scale(1.1); }
     .button-restart:active {
@@ -127,30 +141,14 @@ html {
   .button-change {
     margin-left: 20rem;
     margin-right: 5rem;
-    color: #fff;
     opacity: 1;
-    display: block;
-    width: 10rem;
-    height: 4rem;
-    border: 2px solid #fff;
-    text-transform: uppercase;
     cursor: pointer;
-    background-color: transparent;
-    transition: opacity 0.5s, transform 2s, box-shadow 0.3s, scale 0.3s;
-    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff; }
+    transition: opacity 0.5s, transform 2s, box-shadow 0.3s, scale 0.3s; }
     .button-change:hover {
       scale: 1.1; }
     .button-change:active {
       scale: 1;
       box-shadow: none; }
-  .button-replay {
-    color: #fff;
-    width: 10rem;
-    height: 4rem;
-    border: 2px solid #fff;
-    text-transform: uppercase;
-    background-color: transparent;
-    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff; }
 
 .replay {
   margin-left: 5rem;
@@ -160,7 +158,8 @@ html {
   .replay-next, .replay-previous {
     font-size: 4rem;
     cursor: pointer;
-    transition: all 0.5s; }
+    transition: all 0.5s;
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #2e89ff, 0 0 82px #2e89ff, 0 0 92px #2e89ff, 0 0 102px #2e89ff, 0 0 151px #2e89ff; }
   .replay-next {
     margin-left: 2rem; }
   .replay-previous {
@@ -202,8 +201,8 @@ html {
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff;
-  animation: neon 1.5s infinite alternate; }
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff;
+  animation: neonPink 1.5s infinite alternate; }
 
 .row-one-col-one,
 .row-one-col-two,

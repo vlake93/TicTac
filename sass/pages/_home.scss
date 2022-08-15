@@ -36,9 +36,8 @@
   align-items: center;
   font-size: 10rem;
   height: 20rem;
-  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #2e89ff,
-    0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff, inset 0 0 1.3rem #2e89ff;
-  animation: neon 1.5s infinite alternate;
+  box-shadow: $shadow-border;
+  animation: neonPink 1.5s infinite alternate;
 }
 
 // ALL COL BUT ROW 1-2 only

@@ -24,14 +24,44 @@
   }
 }
 
-@keyframes neon {
+@keyframes neonPink {
   100% {
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #bc13fe,
-      0 0 80px #bc13fe, 0 0 90px #bc13fe, 0 0 100px #bc13fe, 0 0 150px #bc13fe;
+    text-shadow: 0 0 4px $color-white, 0 0 11px $color-white,
+      0 0 19px $color-white, 0 0 40px $color-pink, 0 0 80px $color-pink,
+      0 0 90px $color-pink, 0 0 100px $color-pink, 0 0 150px $color-pink;
   }
 
   0% {
-    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #bc13fe,
-      0 0 45px #bc13fe, 0 0 55px #bc13fe, 0 0 70px #bc13fe, 0 0 80px #bc13fe;
+    text-shadow: 0 0 2px $color-white, 0 0 4px $color-white,
+      0 0 6px $color-white, 0 0 10px $color-pink, 0 0 45px $color-pink,
+      0 0 55px $color-pink, 0 0 70px $color-pink, 0 0 80px $color-pink;
+  }
+}
+
+@keyframes neonBlue {
+  100% {
+    text-shadow: 0 0 4px $color-white, 0 0 11px $color-white,
+      0 0 19px $color-white, 0 0 40px $color-blue, 0 0 80px $color-blue,
+      0 0 90px $color-blue, 0 0 100px $color-blue, 0 0 150px $color-blue;
+  }
+
+  0% {
+    text-shadow: 0 0 2px $color-white, 0 0 4px $color-white,
+      0 0 6px $color-white, 0 0 10px $color-blue, 0 0 45px $color-blue,
+      0 0 55px $color-blue, 0 0 70px $color-blue, 0 0 80px $color-blue;
+  }
+}
+
+@keyframes neonRed {
+  100% {
+    text-shadow: 0 0 4px $color-white, 0 0 11px $color-white,
+      0 0 19px $color-white, 0 0 40px $color-red, 0 0 80px $color-red,
+      0 0 90px $color-red, 0 0 100px $color-red, 0 0 150px $color-red;
+  }
+
+  0% {
+    text-shadow: 0 0 2px $color-white, 0 0 4px $color-white,
+      0 0 6px $color-white, 0 0 10px $color-red, 0 0 45px $color-red,
+      0 0 55px $color-red, 0 0 70px $color-red, 0 0 80px $color-red;
   }
 }

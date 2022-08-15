@@ -24,7 +24,15 @@ let board = [
   [0, 0, 0],
 ];
 
-let player = 1;
+// CHANGE PLAYER
+changeEl.addEventListener("click", () => {
+  if (playerTurnEl.textContent === "X") {
+    playerTurnEl.textContent = "O";
+    box.style.cursor = "not-allowed";
+  } else if (playerTurnEl.textContent === "O") {
+    playerTurnEl.textContent = "X";
+  }
+});
 
 // USED TO CHECK IF BOXES/TILES HAVE VALUES AND DISABLE CHANGE PLAYER BUTTON THEN CHECKS FOR WINNER EACH MOVE
 boxes.forEach((box, index) => {
@@ -37,16 +45,11 @@ boxes.forEach((box, index) => {
         box.textContent = "X";
         playerTurnEl.textContent = "O";
         box.style.pointerEvents = "none";
-      }
-      // (playerTurnEl.textContent === "O" && box.textContent === "")
-      else {
+      } else {
         box.textContent = "O";
         playerTurnEl.textContent = "X";
         box.style.pointerEvents = "none";
       }
-      //  else {
-      //   console.log("Tile already taken");
-      // }
       chickenDinner();
     }
   });
@@ -56,43 +59,27 @@ function saveData(index) {
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
-  // if (playerTurnEl.textContent === "X") {
-  //   board[row][col] = 1;
-  // } else {
-  //   board[row][col] = 2;
-  // }
   console.log(board);
 }
 
+// CHECKS FOR WINNING BOARD FORMATION
 const chickenDinner = () => {
   for (let i = 0; i < 3; i++) {
-    let row = board[i][1] + board[i][1] + board[i][1];
+    let row = board[i][0] + board[i][1] + board[i][2];
     let col = board[0][i] + board[1][i] + board[2][i];
-    // if (row === "XXX" || col === "XXX") {
-    //   winnerWinner();
-    // } else if (row === "OOO" || col === "OOO") {
-    //   winnerWinner();
-    // }
-    // else {
-    // console.log("draw");
-    // }
+    let diagonal1 = board[0][0] + board[1][1] + board[2][2];
+    let diagonal2 = board[0][2] + board[1][1] + board[2][0];
+    if (row === "XXX" || col === "XXX") {
+      winnerWinner();
+    } else if (row === "OOO" || col === "OOO") {
+      winnerWinner();
+    } else if (diagonal1 === "XXX" || diagonal2 === "XXX") {
+      winnerWinner();
+    } else if (diagonal1 === "OOO" || diagonal2 === "OOO") {
+      winnerWinner();
+    }
   }
 };
-
-// const chickenDinner = () => {
-//   for (let i = 0; i < 3; i++) {
-//     let row = board[i][1] + board[i][1] + board[i][1];
-//     let col = board[0][i] + board[1][i] + board[2][i];
-//     if (row === 3 || col === 3) {
-//       winnerWinner();
-//     } else if (row === 6 || col === 6) {
-//       winnerWinner();
-//     }
-// else {
-// console.log("draw");
-// }
-//   }
-// };
 
 // DECLARES WINNER AND DISABLES BOARD
 const winnerWinner = () => {
@@ -195,22 +182,6 @@ const winnerWinner = () => {
 //     winnerWinner();
 //   }
 // };
-
-// function marker() {
-//   changeEl.addEventListener("click", () => {
-//     if (playerTurnEl.textContent === "X" && box.textContent === "") {
-//       box.textContent = "X";
-//       playerTurnEl.textContent = "O";
-//       box.style.cursor = "not-allowed";
-//     } else if (playerTurnEl.textContent === "O" && box.textContent === "") {
-//       box.textContent = "O";
-//       playerTurnEl.textContent = "X";
-//       box.style.cursor = "not-allowed";
-//     } else {
-//       console.log("Tile already taken");
-//     }
-//   });
-// }
 
 // if (boxes[0], boxes[1], boxes[2] === )
 // FIND WAY TO SHORTEN

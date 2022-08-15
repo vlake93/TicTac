@@ -2,6 +2,9 @@
 $color-white: #fff;
 $color-grey: #777;
 $color-black: #000;
+$color-pink: #bc13fe;
+$color-blue: #2e89ff;
+$color-red: #ff0217;
 $main-gradient: linear-gradient(
   to right,
   #d16ba5,
@@ -29,3 +32,20 @@ $button-white: 2px solid $color-white;
 // BUTTON SIZE
 $button-height: 4rem;
 $button-width: 10rem;
+
+// SHADOW
+$shadow-border: 0 0 0.2rem $color-white, 0 0 0.2rem $color-white,
+  0 0 2rem #2e89ff, 0 0 0.8rem #2e89ff, 0 0 2.8rem #2e89ff,
+  inset 0 0 1.3rem #2e89ff;
+
+$shadow-text-green: 0 0 7px $color-white, 0 0 10px $color-white,
+  0 0 21px $color-white, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa,
+  0 0 102px #0fa, 0 0 151px #0fa;
+
+$shadow-text-blue: 0 0 7px $color-white, 0 0 10px $color-white,
+  0 0 21px $color-white, 0 0 42px #2e89ff, 0 0 82px #2e89ff, 0 0 92px #2e89ff,
+  0 0 102px #2e89ff, 0 0 151px #2e89ff;
+
+$shadow-text-red: 0 0 7px $color-white, 0 0 10px $color-white,
+  0 0 21px $color-white, 0 0 42px $color-red, 0 0 82px $color-red,
+  0 0 92px $color-red, 0 0 102px $color-red, 0 0 151px $color-red;
