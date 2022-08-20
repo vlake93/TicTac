@@ -63,9 +63,13 @@ const chickenDinner = () => {
     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
     if (
-      board[0].indexOf("") === -1 &&
-      board[1].indexOf("") === -1 &&
-      board[2].indexOf("") === -1
+      row.indexOf("") === -1 &&
+      col.indexOf("") === -1 &&
+      diagonal1.indexOf("") === 1 &&
+      diagonal2.indexOf("") === 1
+      // board[0].indexOf("") === -1 &&
+      // board[1].indexOf("") === -1 &&
+      // board[2].indexOf("") === -1
     ) {
       tieEl.style.opacity = "1";
       tieEl.style.fontSize = "6rem";
@@ -98,17 +102,26 @@ const winnerWinner = () => {
 };
 
 const restart = () => {
-  restartEl.addEventListener("click", () => {
-    board = [
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""],
-    ];
-    boxes.forEach((box) => {
-      box.textContent = "";
-    });
+  board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
+  tieEl.style.opacity = "0";
+  tieEl.style.fontSize = "1px";
+  restartEl.style.opacity = "0";
+  replayEl.style.opacity = "0";
+  winnerEl.style.fontSize = "1px";
+  winnerEl.style.opacity = "0";
+  changeEl.style.transform = "translateY(0rem)";
+  changeEl.style.opacity = "1";
+  boxes.forEach((box) => {
+    box.textContent = "";
+    box.style.pointerEvents = "auto";
   });
 };
+
+restartEl.addEventListener("click", restart);
 
 // FIND WAY TO REMOVE/SHORTEN
 // const row1col1 = document.querySelector(".row-one-col-one");
