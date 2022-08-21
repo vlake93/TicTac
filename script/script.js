@@ -19,6 +19,7 @@ let board = [
   ["", "", ""],
   ["", "", ""],
 ];
+let moves = [1, 2, 3];
 
 changeEl.addEventListener("click", () => {
   if (playerTurnEl.textContent === "X") {
@@ -50,10 +51,15 @@ boxes.forEach((box, index) => {
 });
 
 const saveData = (index) => {
+  console.log(index);
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
   console.log(board);
+  // for (let i = 0; i < moves.length; i++) {
+  //   moves[i] = board;
+  //   console.log(moves[i]);
+  // }
 };
 
 const chickenDinner = () => {
@@ -67,9 +73,6 @@ const chickenDinner = () => {
       col.indexOf("") === -1 &&
       diagonal1.indexOf("") === 1 &&
       diagonal2.indexOf("") === 1
-      // board[0].indexOf("") === -1 &&
-      // board[1].indexOf("") === -1 &&
-      // board[2].indexOf("") === -1
     ) {
       tieEl.style.opacity = "1";
       tieEl.style.fontSize = "6rem";
@@ -122,6 +125,7 @@ const restart = () => {
 };
 
 restartEl.addEventListener("click", restart);
+// for (let i = 0; i < 9; i++) {}
 
 // FIND WAY TO REMOVE/SHORTEN
 // const row1col1 = document.querySelector(".row-one-col-one");
