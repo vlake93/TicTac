@@ -20,7 +20,7 @@ let board = [
   ["", "", ""],
 ];
 let moves = 0;
-let history = [];
+let moverArr = [];
 
 changeEl.addEventListener("click", () => {
   if (playerTurnEl.textContent === "X") {
@@ -57,7 +57,7 @@ const saveData = (index) => {
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
-  history.push(JSON.parse(JSON.stringify(board)));
+  moverArr.push(JSON.parse(JSON.stringify(board)));
   moves++;
 };
 
@@ -87,14 +87,14 @@ const chickenDinner = () => {
     } else if (
       board[0].indexOf("") === -1 &&
       board[1].indexOf("") === -1 &&
-      board[2].indexOf("") === -1
+      board[2].indexOf("") === -1 &&
+      diagonal1.indexOf("") === -1 &&
+      diagonal2.indexOf("") === -1
     ) {
       noWinner();
     }
   }
 };
-
-let gameOver = false;
 
 const winnerWinner = () => {
   if (playerTurnEl.textContent === "X") {
@@ -118,6 +118,8 @@ const restart = () => {
     ["", "", ""],
     ["", "", ""],
   ];
+  moves = 0;
+  moverArr = [];
   gameContainer.style.pointerEvents = "auto";
   tieEl.style.opacity = "0";
   tieEl.style.fontSize = "1px";
@@ -136,18 +138,68 @@ const restart = () => {
 restartEl.addEventListener("click", restart);
 
 const previous = document.querySelector(".replay-previous");
-const next = document.querySelector("replay-next");
-
+const next = document.querySelector(".replay-next");
+next.style.opacity = "0";
 previous.addEventListener("click", () => {
-  boxes.forEach((box, index) => {
-    box.textContent = history[moves - 1][index][index];
-    moves--;
-  });
+  next.style.opacity = "1";
+  moves--;
+  if (moves === 1) {
+    previous.style.opacity = "0";
+    previous.style.pointerEvents = "none";
+  }
+  if (moves < moverArr.length) {
+    next.style.opacity = "1";
+    next.style.pointerEvents = "auto";
+  }
+  boxes[0].textContent = moverArr[moves - 1][0][0];
+  boxes[1].textContent = moverArr[moves - 1][0][1];
+  boxes[2].textContent = moverArr[moves - 1][0][2];
+  boxes[3].textContent = moverArr[moves - 1][1][0];
+  boxes[4].textContent = moverArr[moves - 1][1][1];
+  boxes[5].textContent = moverArr[moves - 1][1][2];
+  boxes[6].textContent = moverArr[moves - 1][2][0];
+  boxes[7].textContent = moverArr[moves - 1][2][1];
+  boxes[8].textContent = moverArr[moves - 1][2][2];
+  // let firstRow = [boxes[0], boxes[1], boxes[2]];
+  // let secondRow = [boxes[3], boxes[4], boxes[5]];
+  // let thirdRow = [boxes[6], boxes[7], boxes[8]];
+  // firstRow.textContent = moverArr[moves - 1][0];
+  // secondRow.textContent = moverArr[moves - 1][1];
+  // thirdRow.textContent = moverArr[moves - 1][2];`
+  // boxes.forEach((box, index) => {
+  //   box.textContent = moverArr[moves - 1][index][index];
+
+  // });
 });
 
 next.addEventListener("click", () => {
-  boxes.forEach((box, index) => {
-    box.textContent = history[moves - 1][index][index];
-    moves++;
-  });
+  moves++;
+  if (moves === moverArr.length) {
+    next.style.opacity = "0";
+    next.style.pointerEvents = "none";
+  }
+  if (moves > 1) {
+    previous.style.opacity = "1";
+    previous.style.pointerEvents = "auto";
+  }
+  console.log("pressed");
+  boxes[0].textContent = moverArr[moves - 1][0][0];
+  boxes[1].textContent = moverArr[moves - 1][0][1];
+  boxes[2].textContent = moverArr[moves - 1][0][2];
+  boxes[3].textContent = moverArr[moves - 1][1][0];
+  boxes[4].textContent = moverArr[moves - 1][1][1];
+  boxes[5].textContent = moverArr[moves - 1][1][2];
+  boxes[6].textContent = moverArr[moves - 1][2][0];
+  boxes[7].textContent = moverArr[moves - 1][2][1];
+  boxes[8].textContent = moverArr[moves - 1][2][2];
+  // let firstRow = [boxes[0], boxes[1], boxes[2]];
+  // let secondRow = [boxes[3], boxes[4], boxes[5]];
+  // let thirdRow = [boxes[6], boxes[7], boxes[8]];
+  // firstRow.textContent = moverArr[moves - 1][0];
+  // secondRow.textContent = moverArr[moves - 1][1];
+  // thirdRow.textContent = moverArr[moves - 1][2];
+  // boxes.forEach((box, index) => {
+  //   box.textContent = moverArr[moves - 1][index][index];
+
+  // });
 });
