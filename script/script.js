@@ -139,5 +139,15 @@ const previous = document.querySelector(".replay-previous");
 const next = document.querySelector("replay-next");
 
 previous.addEventListener("click", () => {
-  for (let i = 0; i < board.length; i++) {}
+  boxes.forEach((box, index) => {
+    box.textContent = history[moves - 1][index][index];
+    moves--;
+  });
+});
+
+next.addEventListener("click", () => {
+  boxes.forEach((box, index) => {
+    box.textContent = history[moves - 1][index][index];
+    moves++;
+  });
 });
