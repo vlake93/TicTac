@@ -20,7 +20,7 @@ let board = [
   ["", "", ""],
 ];
 let moves = 0;
-let moverArr = [];
+let movesArr = [];
 
 changeEl.addEventListener("click", () => {
   if (playerTurnEl.textContent === "X") {
@@ -57,7 +57,7 @@ const saveData = (index) => {
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
-  moverArr.push(JSON.parse(JSON.stringify(board)));
+  movesArr.push(JSON.parse(JSON.stringify(board)));
   moves++;
 };
 
@@ -119,7 +119,7 @@ const restart = () => {
     ["", "", ""],
   ];
   moves = 0;
-  moverArr = [];
+  movesArr = [];
   gameContainer.style.pointerEvents = "auto";
   tieEl.style.opacity = "0";
   tieEl.style.fontSize = "1px";
@@ -147,34 +147,34 @@ previous.addEventListener("click", () => {
     previous.style.opacity = "0";
     previous.style.pointerEvents = "none";
   }
-  if (moves < moverArr.length) {
+  if (moves < movesArr.length) {
     next.style.opacity = "1";
     next.style.pointerEvents = "auto";
   }
-  boxes[0].textContent = moverArr[moves - 1][0][0];
-  boxes[1].textContent = moverArr[moves - 1][0][1];
-  boxes[2].textContent = moverArr[moves - 1][0][2];
-  boxes[3].textContent = moverArr[moves - 1][1][0];
-  boxes[4].textContent = moverArr[moves - 1][1][1];
-  boxes[5].textContent = moverArr[moves - 1][1][2];
-  boxes[6].textContent = moverArr[moves - 1][2][0];
-  boxes[7].textContent = moverArr[moves - 1][2][1];
-  boxes[8].textContent = moverArr[moves - 1][2][2];
+  boxes[0].textContent = movesArr[moves - 1][0][0];
+  boxes[1].textContent = movesArr[moves - 1][0][1];
+  boxes[2].textContent = movesArr[moves - 1][0][2];
+  boxes[3].textContent = movesArr[moves - 1][1][0];
+  boxes[4].textContent = movesArr[moves - 1][1][1];
+  boxes[5].textContent = movesArr[moves - 1][1][2];
+  boxes[6].textContent = movesArr[moves - 1][2][0];
+  boxes[7].textContent = movesArr[moves - 1][2][1];
+  boxes[8].textContent = movesArr[moves - 1][2][2];
   // let firstRow = [boxes[0], boxes[1], boxes[2]];
   // let secondRow = [boxes[3], boxes[4], boxes[5]];
   // let thirdRow = [boxes[6], boxes[7], boxes[8]];
-  // firstRow.textContent = moverArr[moves - 1][0];
-  // secondRow.textContent = moverArr[moves - 1][1];
-  // thirdRow.textContent = moverArr[moves - 1][2];`
+  // firstRow.textContent = movesArr[moves - 1][0];
+  // secondRow.textContent = movesArr[moves - 1][1];
+  // thirdRow.textContent = movesArr[moves - 1][2];`
   // boxes.forEach((box, index) => {
-  //   box.textContent = moverArr[moves - 1][index][index];
+  //   box.textContent = movesArr[moves - 1][index][index];
 
   // });
 });
 
 next.addEventListener("click", () => {
   moves++;
-  if (moves === moverArr.length) {
+  if (moves === movesArr.length) {
     next.style.opacity = "0";
     next.style.pointerEvents = "none";
   }
@@ -183,23 +183,47 @@ next.addEventListener("click", () => {
     previous.style.pointerEvents = "auto";
   }
   console.log("pressed");
-  boxes[0].textContent = moverArr[moves - 1][0][0];
-  boxes[1].textContent = moverArr[moves - 1][0][1];
-  boxes[2].textContent = moverArr[moves - 1][0][2];
-  boxes[3].textContent = moverArr[moves - 1][1][0];
-  boxes[4].textContent = moverArr[moves - 1][1][1];
-  boxes[5].textContent = moverArr[moves - 1][1][2];
-  boxes[6].textContent = moverArr[moves - 1][2][0];
-  boxes[7].textContent = moverArr[moves - 1][2][1];
-  boxes[8].textContent = moverArr[moves - 1][2][2];
+  boxes[0].textContent = movesArr[moves - 1][0][0];
+  boxes[1].textContent = movesArr[moves - 1][0][1];
+  boxes[2].textContent = movesArr[moves - 1][0][2];
+  boxes[3].textContent = movesArr[moves - 1][1][0];
+  boxes[4].textContent = movesArr[moves - 1][1][1];
+  boxes[5].textContent = movesArr[moves - 1][1][2];
+  boxes[6].textContent = movesArr[moves - 1][2][0];
+  boxes[7].textContent = movesArr[moves - 1][2][1];
+  boxes[8].textContent = movesArr[moves - 1][2][2];
   // let firstRow = [boxes[0], boxes[1], boxes[2]];
   // let secondRow = [boxes[3], boxes[4], boxes[5]];
   // let thirdRow = [boxes[6], boxes[7], boxes[8]];
-  // firstRow.textContent = moverArr[moves - 1][0];
-  // secondRow.textContent = moverArr[moves - 1][1];
-  // thirdRow.textContent = moverArr[moves - 1][2];
+  // firstRow.textContent = movesArr[moves - 1][0];
+  // secondRow.textContent = movesArr[moves - 1][1];
+  // thirdRow.textContent = movesArr[moves - 1][2];
   // boxes.forEach((box, index) => {
-  //   box.textContent = moverArr[moves - 1][index][index];
+  //   box.textContent = movesArr[moves - 1][index][index];
 
   // });
+});
+
+const undo = document.querySelector(".undo-logo");
+const redo = document.querySelector(".redo-logo");
+
+let poppedMovesArr = [];
+
+undo.addEventListener("click", () => {
+  moves--;
+  boxes.forEach((box) => {
+    box.style.pointerEvents = "auto";
+  });
+  if (movesArr > 1) {
+    poppedMovesArr.push(movesArr.pop());
+  }
+  boxes[0].textContent = movesArr[moves - 1][0][0];
+  boxes[1].textContent = movesArr[moves - 1][0][1];
+  boxes[2].textContent = movesArr[moves - 1][0][2];
+  boxes[3].textContent = movesArr[moves - 1][1][0];
+  boxes[4].textContent = movesArr[moves - 1][1][1];
+  boxes[5].textContent = movesArr[moves - 1][1][2];
+  boxes[6].textContent = movesArr[moves - 1][2][0];
+  boxes[7].textContent = movesArr[moves - 1][2][1];
+  boxes[8].textContent = movesArr[moves - 1][2][2];
 });
