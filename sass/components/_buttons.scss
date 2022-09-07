@@ -68,6 +68,7 @@
 
   &-next {
     margin-left: 2rem;
+    opacity: 0;
   }
   &-previous {
     margin-right: 2rem;
@@ -84,6 +85,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  transition: all 1s;
 }
 
 .undo,
@@ -106,4 +108,10 @@
 .redo-logo {
   height: 4rem;
   cursor: pointer;
+  opacity: 0;
+  transition: all 1s;
+}
+
+.redo-logo {
+  opacity: 0;
 }

@@ -110,7 +110,8 @@ html {
 .x-score,
 .o-score {
   color: #fff;
-  font-size: 4rem; }
+  font-size: 4rem;
+  width: 30rem; }
 
 .button {
   margin-top: 2rem;
@@ -160,7 +161,8 @@ html {
     transition: all 0.5s;
     text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #2e89ff, 0 0 82px #2e89ff, 0 0 92px #2e89ff, 0 0 102px #2e89ff, 0 0 151px #2e89ff; }
   .replay-next {
-    margin-left: 2rem; }
+    margin-left: 2rem;
+    opacity: 0; }
   .replay-previous {
     margin-right: 2rem;
     margin-left: 4rem; }
@@ -171,7 +173,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem; }
+  gap: 1rem;
+  transition: all 1s; }
 
 .undo,
 .redo {
@@ -190,7 +193,12 @@ html {
 .undo-logo,
 .redo-logo {
   height: 4rem;
-  cursor: pointer; }
+  cursor: pointer;
+  opacity: 0;
+  transition: all 1s; }
+
+.redo-logo {
+  opacity: 0; }
 
 .bg-video {
   position: fixed;
@@ -214,7 +222,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40rem; }
+  gap: 35rem; }
 
 .row-one-col-one,
 .row-one-col-two,

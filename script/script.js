@@ -21,19 +21,20 @@ let board = [
 ];
 let moves = 0;
 let movesArr = [];
-
-changeEl.addEventListener("click", () => {
+function changePlayer() {
   if (playerTurnEl.textContent === "X") {
     playerTurnEl.textContent = "O";
   } else if (playerTurnEl.textContent === "O") {
     playerTurnEl.textContent = "X";
   }
-  // box.style.cursor = "not-allowed";
-});
+}
+changeEl.addEventListener("click", changePlayer);
 
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
     saveData(index);
+    undo.style.opacity = "1";
+    undo.style.pointerEvents = "auto";
     if (boxes.textContent === "X" || "O") {
       changeEl.style.opacity = "0";
       changeEl.style.transform = "translateY(-20rem)";
@@ -99,14 +100,6 @@ const oscore = document.querySelector(".o-score");
 let scoreOfX = 0;
 let scoreOfO = 0;
 
-// if (winner.textContent.includes("X")) {
-//   scoreOfX++;
-//   playerTurnEl.textContent = "O";
-// } else {
-//   scoreOfO++;
-//   playerTurnEl.textContent = "X";
-// }
-
 xscore.textContent = `X - ${scoreOfX}`;
 oscore.textContent = `O - ${scoreOfO}`;
 
@@ -123,10 +116,8 @@ const winnerWinner = () => {
   replayEl.style.opacity = "1";
   if (winner.textContent === "X") {
     scoreOfX++;
-    playerTurnEl.textContent = "O";
   } else {
     scoreOfO++;
-    playerTurnEl.textContent = "X";
   }
   xscore.textContent = `X - ${scoreOfX}`;
   oscore.textContent = `O - ${scoreOfO}`;
@@ -172,11 +163,10 @@ function movesToText() {
   boxes[7].textContent = movesArr[moves - 1][2][1];
   boxes[8].textContent = movesArr[moves - 1][2][2];
 }
-
+const redoUndo = document.querySelector(".redo-undo");
 const previous = document.querySelector(".replay-previous");
 const next = document.querySelector(".replay-next");
 
-next.style.opacity = "0";
 previous.addEventListener("click", () => {
   next.style.opacity = "1";
   moves--;
@@ -188,6 +178,8 @@ previous.addEventListener("click", () => {
     next.style.opacity = "1";
     next.style.pointerEvents = "auto";
   }
+  redoUndo.style.opacity = "0";
+  redoUndo.style.pointerEvents = "none";
   movesToText();
 });
 
@@ -211,32 +203,55 @@ const redo = document.querySelector(".redo-logo");
 let poppedMovesArr = [];
 
 undo.addEventListener("click", () => {
+  console.log("PRESSED MOFO");
   moves--;
-  if (playerTurnEl.textContent === "X") {
-    playerTurnEl.textContent = "O";
-  } else if (playerTurnEl.textContent === "O") {
-    playerTurnEl.textContent = "X";
-  }
+  changePlayer();
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
-  if (movesArr > 1) {
-    poppedMovesArr.push(movesArr.pop());
+  if (playerTurnEl === "X") {
+    scoreOfO--;
+  } else {
+    scoreOfX--;
   }
+  xscore.textContent = `X - ${scoreOfX}`;
+  oscore.textContent = `O - ${scoreOfO}`;
+  if (moves === 1) {
+    undo.style.opacity = "0";
+    undo.style.pointerEvents = "none";
+  }
+  if (moves < movesArr.length) {
+    redo.style.opacity = "1";
+    redo.style.pointerEvents = "auto";
+  }
+  tieEl.style.opacity = "0";
+  tieEl.style.fontSize = "1px";
+  restartEl.style.opacity = "0";
+  replayEl.style.opacity = "0";
+  winnerEl.style.fontSize = "1px";
+  winnerEl.style.opacity = "0";
+  // if (movesArr > 0) {
+  // poppedMovesArr.push(movesArr.pop());
+  // }
   movesToText();
 });
 
 redo.addEventListener("click", () => {
+  console.log("PRESSED MOFO");
   moves++;
-  if (playerTurnEl.textContent === "X") {
-    playerTurnEl.textContent = "O";
-  } else if (playerTurnEl.textContent === "O") {
-    playerTurnEl.textContent = "X";
-  }
+  changePlayer();
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
+  if (moves === movesArr.length) {
+    redo.style.opacity = "0";
+    redo.style.pointerEvents = "none";
+  }
+  if (moves > 1) {
+    undo.style.opacity = "1";
+    undo.style.pointerEvents = "auto";
+  }
   // if(movesArr.length)
-  movesArr.push(poppedMovesArr.pop());
+  // movesArr.push(poppedMovesArr.pop());
   movesToText();
 });
