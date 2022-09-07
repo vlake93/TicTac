@@ -20,6 +20,13 @@
   justify-content: center;
 }
 
+.board-scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40rem;
+}
+
 .row-one-col-one,
 .row-one-col-two,
 .row-one-col-three,

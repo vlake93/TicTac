@@ -46,19 +46,17 @@ boxes.forEach((box, index) => {
         playerTurnEl.textContent = "X";
         box.style.pointerEvents = "none";
       }
-
       chickenDinner();
     }
   });
 });
 
 const saveData = (index) => {
-  // console.log(index);
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
-  movesArr.push(JSON.parse(JSON.stringify(board)));
   moves++;
+  movesArr.push(JSON.parse(JSON.stringify(board)));
 };
 
 function noWinner() {
@@ -96,16 +94,42 @@ const chickenDinner = () => {
   }
 };
 
+const xscore = document.querySelector(".x-score");
+const oscore = document.querySelector(".o-score");
+let scoreOfX = 0;
+let scoreOfO = 0;
+
+// if (winner.textContent.includes("X")) {
+//   scoreOfX++;
+//   playerTurnEl.textContent = "O";
+// } else {
+//   scoreOfO++;
+//   playerTurnEl.textContent = "X";
+// }
+
+xscore.textContent = `X - ${scoreOfX}`;
+oscore.textContent = `O - ${scoreOfO}`;
+
 const winnerWinner = () => {
   if (playerTurnEl.textContent === "X") {
     winner.textContent = currentPlayer[1];
   } else if (playerTurnEl.textContent === "O") {
     winner.textContent = currentPlayer[0];
   }
+
   winnerEl.style.fontSize = "6rem";
   winnerEl.style.opacity = "1";
   restartEl.style.opacity = "1";
   replayEl.style.opacity = "1";
+  if (winner.textContent === "X") {
+    scoreOfX++;
+    playerTurnEl.textContent = "O";
+  } else {
+    scoreOfO++;
+    playerTurnEl.textContent = "X";
+  }
+  xscore.textContent = `X - ${scoreOfX}`;
+  oscore.textContent = `O - ${scoreOfO}`;
   boxes.forEach((box) => {
     box.style.pointerEvents = "none";
   });
@@ -137,8 +161,21 @@ const restart = () => {
 
 restartEl.addEventListener("click", restart);
 
+function movesToText() {
+  boxes[0].textContent = movesArr[moves - 1][0][0];
+  boxes[1].textContent = movesArr[moves - 1][0][1];
+  boxes[2].textContent = movesArr[moves - 1][0][2];
+  boxes[3].textContent = movesArr[moves - 1][1][0];
+  boxes[4].textContent = movesArr[moves - 1][1][1];
+  boxes[5].textContent = movesArr[moves - 1][1][2];
+  boxes[6].textContent = movesArr[moves - 1][2][0];
+  boxes[7].textContent = movesArr[moves - 1][2][1];
+  boxes[8].textContent = movesArr[moves - 1][2][2];
+}
+
 const previous = document.querySelector(".replay-previous");
 const next = document.querySelector(".replay-next");
+
 next.style.opacity = "0";
 previous.addEventListener("click", () => {
   next.style.opacity = "1";
@@ -151,25 +188,7 @@ previous.addEventListener("click", () => {
     next.style.opacity = "1";
     next.style.pointerEvents = "auto";
   }
-  boxes[0].textContent = movesArr[moves - 1][0][0];
-  boxes[1].textContent = movesArr[moves - 1][0][1];
-  boxes[2].textContent = movesArr[moves - 1][0][2];
-  boxes[3].textContent = movesArr[moves - 1][1][0];
-  boxes[4].textContent = movesArr[moves - 1][1][1];
-  boxes[5].textContent = movesArr[moves - 1][1][2];
-  boxes[6].textContent = movesArr[moves - 1][2][0];
-  boxes[7].textContent = movesArr[moves - 1][2][1];
-  boxes[8].textContent = movesArr[moves - 1][2][2];
-  // let firstRow = [boxes[0], boxes[1], boxes[2]];
-  // let secondRow = [boxes[3], boxes[4], boxes[5]];
-  // let thirdRow = [boxes[6], boxes[7], boxes[8]];
-  // firstRow.textContent = movesArr[moves - 1][0];
-  // secondRow.textContent = movesArr[moves - 1][1];
-  // thirdRow.textContent = movesArr[moves - 1][2];`
-  // boxes.forEach((box, index) => {
-  //   box.textContent = movesArr[moves - 1][index][index];
-
-  // });
+  movesToText();
 });
 
 next.addEventListener("click", () => {
@@ -183,25 +202,7 @@ next.addEventListener("click", () => {
     previous.style.pointerEvents = "auto";
   }
   console.log("pressed");
-  boxes[0].textContent = movesArr[moves - 1][0][0];
-  boxes[1].textContent = movesArr[moves - 1][0][1];
-  boxes[2].textContent = movesArr[moves - 1][0][2];
-  boxes[3].textContent = movesArr[moves - 1][1][0];
-  boxes[4].textContent = movesArr[moves - 1][1][1];
-  boxes[5].textContent = movesArr[moves - 1][1][2];
-  boxes[6].textContent = movesArr[moves - 1][2][0];
-  boxes[7].textContent = movesArr[moves - 1][2][1];
-  boxes[8].textContent = movesArr[moves - 1][2][2];
-  // let firstRow = [boxes[0], boxes[1], boxes[2]];
-  // let secondRow = [boxes[3], boxes[4], boxes[5]];
-  // let thirdRow = [boxes[6], boxes[7], boxes[8]];
-  // firstRow.textContent = movesArr[moves - 1][0];
-  // secondRow.textContent = movesArr[moves - 1][1];
-  // thirdRow.textContent = movesArr[moves - 1][2];
-  // boxes.forEach((box, index) => {
-  //   box.textContent = movesArr[moves - 1][index][index];
-
-  // });
+  movesToText();
 });
 
 const undo = document.querySelector(".undo-logo");
@@ -211,19 +212,31 @@ let poppedMovesArr = [];
 
 undo.addEventListener("click", () => {
   moves--;
+  if (playerTurnEl.textContent === "X") {
+    playerTurnEl.textContent = "O";
+  } else if (playerTurnEl.textContent === "O") {
+    playerTurnEl.textContent = "X";
+  }
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
   if (movesArr > 1) {
     poppedMovesArr.push(movesArr.pop());
   }
-  boxes[0].textContent = movesArr[moves - 1][0][0];
-  boxes[1].textContent = movesArr[moves - 1][0][1];
-  boxes[2].textContent = movesArr[moves - 1][0][2];
-  boxes[3].textContent = movesArr[moves - 1][1][0];
-  boxes[4].textContent = movesArr[moves - 1][1][1];
-  boxes[5].textContent = movesArr[moves - 1][1][2];
-  boxes[6].textContent = movesArr[moves - 1][2][0];
-  boxes[7].textContent = movesArr[moves - 1][2][1];
-  boxes[8].textContent = movesArr[moves - 1][2][2];
+  movesToText();
+});
+
+redo.addEventListener("click", () => {
+  moves++;
+  if (playerTurnEl.textContent === "X") {
+    playerTurnEl.textContent = "O";
+  } else if (playerTurnEl.textContent === "O") {
+    playerTurnEl.textContent = "X";
+  }
+  boxes.forEach((box) => {
+    box.style.pointerEvents = "auto";
+  });
+  // if(movesArr.length)
+  movesArr.push(poppedMovesArr.pop());
+  movesToText();
 });

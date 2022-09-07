@@ -107,6 +107,11 @@ html {
   color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #ff0217, 0 0 82px #ff0217, 0 0 92px #ff0217, 0 0 102px #ff0217, 0 0 151px #ff0217; }
 
+.x-score,
+.o-score {
+  color: #fff;
+  font-size: 4rem; }
+
 .button {
   margin-top: 2rem;
   margin-bottom: 3rem;
@@ -204,6 +209,12 @@ html {
   display: grid;
   grid-template-columns: repeat(3, 20rem);
   justify-content: center; }
+
+.board-scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40rem; }
 
 .row-one-col-one,
 .row-one-col-two,
