@@ -47,6 +47,12 @@ boxes.forEach((box, index) => {
         playerTurnEl.textContent = "X";
         box.style.pointerEvents = "none";
       }
+      redo.style.opacity = "0";
+      redo.style.pointerEvents = "none";
+      poppedMovesArr = [];
+      console.log(moves);
+      console.log(movesArr);
+      console.log(board);
       chickenDinner();
     }
   });
@@ -86,9 +92,9 @@ const chickenDinner = () => {
     } else if (
       board[0].indexOf("") === -1 &&
       board[1].indexOf("") === -1 &&
-      board[2].indexOf("") === -1 &&
-      diagonal1.indexOf("") === -1 &&
-      diagonal2.indexOf("") === -1
+      board[2].indexOf("") === -1
+      // diagonal1.indexOf("") === -1 &&
+      // diagonal2.indexOf("") === -1
     ) {
       noWinner();
     }
@@ -99,6 +105,7 @@ const xscore = document.querySelector(".x-score");
 const oscore = document.querySelector(".o-score");
 let scoreOfX = 0;
 let scoreOfO = 0;
+let scores = [0, 0];
 
 xscore.textContent = `X - ${scoreOfX}`;
 oscore.textContent = `O - ${scoreOfO}`;
@@ -114,6 +121,8 @@ const winnerWinner = () => {
   winnerEl.style.opacity = "1";
   restartEl.style.opacity = "1";
   replayEl.style.opacity = "1";
+  // scores[0](JSON.parse(JSON.stringify(scoreOfX)));
+  // scores[1](JSON.parse(JSON.stringify(scoreOfO)));
   if (winner.textContent === "X") {
     scoreOfX++;
   } else {
@@ -124,8 +133,16 @@ const winnerWinner = () => {
   boxes.forEach((box) => {
     box.style.pointerEvents = "none";
   });
-  return;
 };
+
+function hideBanner() {
+  tieEl.style.opacity = "0";
+  tieEl.style.fontSize = "1px";
+  restartEl.style.opacity = "0";
+  replayEl.style.opacity = "0";
+  winnerEl.style.fontSize = "1px";
+  winnerEl.style.opacity = "0";
+}
 
 const restart = () => {
   board = [
@@ -136,12 +153,7 @@ const restart = () => {
   moves = 0;
   movesArr = [];
   gameContainer.style.pointerEvents = "auto";
-  tieEl.style.opacity = "0";
-  tieEl.style.fontSize = "1px";
-  restartEl.style.opacity = "0";
-  replayEl.style.opacity = "0";
-  winnerEl.style.fontSize = "1px";
-  winnerEl.style.opacity = "0";
+  hideBanner();
   changeEl.style.transform = "translateY(0rem)";
   changeEl.style.opacity = "1";
   boxes.forEach((box) => {
@@ -152,7 +164,7 @@ const restart = () => {
 
 restartEl.addEventListener("click", restart);
 
-function movesToText() {
+function movesToBoard() {
   boxes[0].textContent = movesArr[moves - 1][0][0];
   boxes[1].textContent = movesArr[moves - 1][0][1];
   boxes[2].textContent = movesArr[moves - 1][0][2];
@@ -180,7 +192,7 @@ previous.addEventListener("click", () => {
   }
   redoUndo.style.opacity = "0";
   redoUndo.style.pointerEvents = "none";
-  movesToText();
+  movesToBoard();
 });
 
 next.addEventListener("click", () => {
@@ -193,8 +205,7 @@ next.addEventListener("click", () => {
     previous.style.opacity = "1";
     previous.style.pointerEvents = "auto";
   }
-  console.log("pressed");
-  movesToText();
+  movesToBoard();
 });
 
 const undo = document.querySelector(".undo-logo");
@@ -203,16 +214,15 @@ const redo = document.querySelector(".redo-logo");
 let poppedMovesArr = [];
 
 undo.addEventListener("click", () => {
-  console.log("PRESSED MOFO");
   moves--;
   changePlayer();
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
   if (playerTurnEl === "X") {
-    scoreOfO--;
+    scoreOfO = scores[1];
   } else {
-    scoreOfX--;
+    scoreOfX = scores[0];
   }
   xscore.textContent = `X - ${scoreOfX}`;
   oscore.textContent = `O - ${scoreOfO}`;
@@ -224,20 +234,18 @@ undo.addEventListener("click", () => {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
   }
-  tieEl.style.opacity = "0";
-  tieEl.style.fontSize = "1px";
-  restartEl.style.opacity = "0";
-  replayEl.style.opacity = "0";
-  winnerEl.style.fontSize = "1px";
-  winnerEl.style.opacity = "0";
+  poppedMovesArr.push(movesArr.pop());
+  hideBanner();
+  board = movesArr[moves - 1];
   // if (movesArr > 0) {
-  // poppedMovesArr.push(movesArr.pop());
   // }
-  movesToText();
+  movesToBoard();
+  console.log(moves);
+  console.log(movesArr);
+  console.log(board);
 });
 
 redo.addEventListener("click", () => {
-  console.log("PRESSED MOFO");
   moves++;
   changePlayer();
   boxes.forEach((box) => {
@@ -251,7 +259,21 @@ redo.addEventListener("click", () => {
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
   }
+
+  if (poppedMovesArr.length < 2) {
+    redo.style.opacity = "0";
+    redo.style.pointerEvents = "none";
+  }
+  movesArr.push(poppedMovesArr.pop());
   // if(movesArr.length)
-  // movesArr.push(poppedMovesArr.pop());
-  movesToText();
+  // for (let i = 0; i < board.length; i++) {
+  board = movesArr[moves - 1];
+  // }
+  movesToBoard();
+  chickenDinner();
+  console.log(moves);
+  console.log(movesArr);
+  console.log(board);
 });
+
+// FIX THE BOARD!!!!!
