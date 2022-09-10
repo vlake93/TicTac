@@ -49,10 +49,15 @@ boxes.forEach((box, index) => {
       }
       redo.style.opacity = "0";
       redo.style.pointerEvents = "none";
-      poppedMovesArr = [];
+      // poppedMovesArr = [];
+      gameOver = false;
+      // xscore.textContent = `X - ${scoreOfX}`;
+      // oscore.textContent = `O - ${scoreOfO}`;
+      // board = movesArr[moves - 1];
       console.log(moves);
       console.log(movesArr);
-      console.log(board);
+      // console.log(board);
+      console.log(poppedMovesArr);
       chickenDinner();
     }
   });
@@ -93,8 +98,6 @@ const chickenDinner = () => {
       board[0].indexOf("") === -1 &&
       board[1].indexOf("") === -1 &&
       board[2].indexOf("") === -1
-      // diagonal1.indexOf("") === -1 &&
-      // diagonal2.indexOf("") === -1
     ) {
       noWinner();
     }
@@ -105,10 +108,12 @@ const xscore = document.querySelector(".x-score");
 const oscore = document.querySelector(".o-score");
 let scoreOfX = 0;
 let scoreOfO = 0;
-let scores = [0, 0];
+// let scores = [0, 0];
 
 xscore.textContent = `X - ${scoreOfX}`;
 oscore.textContent = `O - ${scoreOfO}`;
+
+let gameOver = false;
 
 const winnerWinner = () => {
   if (playerTurnEl.textContent === "X") {
@@ -123,11 +128,12 @@ const winnerWinner = () => {
   replayEl.style.opacity = "1";
   // scores[0](JSON.parse(JSON.stringify(scoreOfX)));
   // scores[1](JSON.parse(JSON.stringify(scoreOfO)));
-  if (winner.textContent === "X") {
-    scoreOfX++;
-  } else {
-    scoreOfO++;
-  }
+  gameOver = true;
+  // if (gameOver && winner.textContent === "X") {
+  //   scoreOfX++;
+  // } else {
+  //   scoreOfO++;
+  // }
   xscore.textContent = `X - ${scoreOfX}`;
   oscore.textContent = `O - ${scoreOfO}`;
   boxes.forEach((box) => {
@@ -152,6 +158,7 @@ const restart = () => {
   ];
   moves = 0;
   movesArr = [];
+  redoUndo.style.opacity = "1";
   gameContainer.style.pointerEvents = "auto";
   hideBanner();
   changeEl.style.transform = "translateY(0rem)";
@@ -160,6 +167,7 @@ const restart = () => {
     box.textContent = "";
     box.style.pointerEvents = "auto";
   });
+  undo.style.opacity = "0";
 };
 
 restartEl.addEventListener("click", restart);
@@ -219,13 +227,22 @@ undo.addEventListener("click", () => {
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
-  if (playerTurnEl === "X") {
-    scoreOfO = scores[1];
-  } else {
-    scoreOfX = scores[0];
-  }
-  xscore.textContent = `X - ${scoreOfX}`;
-  oscore.textContent = `O - ${scoreOfO}`;
+  // boxes.forEach((box) => {
+  //   box.style.pointerEvents = "auto";
+  //   if (box.textContent !== "") {
+  //     box.style.pointerEvents = "none";
+  //   }
+  // });
+  // if (gameOver) {
+  //   if (playerTurnEl === "X") {
+  //     scoreOfO--;
+  //   } else if (playerTurnEl === "O") {
+  //     scoreOfX--;
+  //   }
+  // }
+  // xscore.textContent = `X - ${scoreOfX}`;
+  // oscore.textContent = `O - ${scoreOfO}`;
+  gameOver = false;
   if (moves === 1) {
     undo.style.opacity = "0";
     undo.style.pointerEvents = "none";
@@ -234,7 +251,9 @@ undo.addEventListener("click", () => {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
   }
-  poppedMovesArr.push(movesArr.pop());
+  if (movesArr.length > 0) {
+    poppedMovesArr.push(movesArr.pop());
+  }
   hideBanner();
   board = movesArr[moves - 1];
   // if (movesArr > 0) {
@@ -264,7 +283,9 @@ redo.addEventListener("click", () => {
     redo.style.opacity = "0";
     redo.style.pointerEvents = "none";
   }
-  movesArr.push(poppedMovesArr.pop());
+  if (poppedMovesArr.length > 0) {
+    movesArr.push(poppedMovesArr.pop());
+  }
   // if(movesArr.length)
   // for (let i = 0; i < board.length; i++) {
   board = movesArr[moves - 1];
@@ -273,7 +294,16 @@ redo.addEventListener("click", () => {
   chickenDinner();
   console.log(moves);
   console.log(movesArr);
-  console.log(board);
 });
 
 // FIX THE BOARD!!!!!
+
+// undo.addEventListener("click", () => {
+//   if (gameOver) {
+//     if (playerTurnEl.textContent === "X") {
+//       scoreOfX--;
+//     } else {
+//       scoreOfO--;
+//     }
+//   }
+// });
