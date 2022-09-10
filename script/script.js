@@ -37,7 +37,7 @@ boxes.forEach((box, index) => {
     undo.style.pointerEvents = "auto";
     if (boxes.textContent === "X" || "O") {
       changeEl.style.opacity = "0";
-      changeEl.style.transform = "translateY(-20rem)";
+      changeEl.style.pointerEvents = "none";
       if (playerTurnEl.textContent === "X" && box.textContent === "") {
         box.textContent = "X";
         playerTurnEl.textContent = "O";
@@ -49,14 +49,17 @@ boxes.forEach((box, index) => {
       }
       redo.style.opacity = "0";
       redo.style.pointerEvents = "none";
-      // poppedMovesArr = [];
+      poppedMovesArr = [];
       gameOver = false;
       // xscore.textContent = `X - ${scoreOfX}`;
       // oscore.textContent = `O - ${scoreOfO}`;
       // board = movesArr[moves - 1];
       console.log(moves);
+      console.log(`This is movesArr`);
       console.log(movesArr);
-      // console.log(board);
+      console.log(`This is board`);
+      console.log(board);
+      console.log(`This is poppedArr`);
       console.log(poppedMovesArr);
       chickenDinner();
     }
@@ -67,8 +70,8 @@ const saveData = (index) => {
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
-  moves++;
   movesArr.push(JSON.parse(JSON.stringify(board)));
+  moves++;
 };
 
 function noWinner() {
@@ -116,6 +119,7 @@ oscore.textContent = `O - ${scoreOfO}`;
 let gameOver = false;
 
 const winnerWinner = () => {
+  movesToBoard();
   if (playerTurnEl.textContent === "X") {
     winner.textContent = currentPlayer[1];
   } else if (playerTurnEl.textContent === "O") {
@@ -161,8 +165,8 @@ const restart = () => {
   redoUndo.style.opacity = "1";
   gameContainer.style.pointerEvents = "auto";
   hideBanner();
-  changeEl.style.transform = "translateY(0rem)";
   changeEl.style.opacity = "1";
+  changeEl.style.pointerEvents = "auto";
   boxes.forEach((box) => {
     box.textContent = "";
     box.style.pointerEvents = "auto";
@@ -173,15 +177,27 @@ const restart = () => {
 restartEl.addEventListener("click", restart);
 
 function movesToBoard() {
-  boxes[0].textContent = movesArr[moves - 1][0][0];
-  boxes[1].textContent = movesArr[moves - 1][0][1];
-  boxes[2].textContent = movesArr[moves - 1][0][2];
-  boxes[3].textContent = movesArr[moves - 1][1][0];
-  boxes[4].textContent = movesArr[moves - 1][1][1];
-  boxes[5].textContent = movesArr[moves - 1][1][2];
-  boxes[6].textContent = movesArr[moves - 1][2][0];
-  boxes[7].textContent = movesArr[moves - 1][2][1];
-  boxes[8].textContent = movesArr[moves - 1][2][2];
+  if (movesArr.length > 0) {
+    boxes[0].textContent = movesArr[moves - 1][0][0];
+    boxes[1].textContent = movesArr[moves - 1][0][1];
+    boxes[2].textContent = movesArr[moves - 1][0][2];
+    boxes[3].textContent = movesArr[moves - 1][1][0];
+    boxes[4].textContent = movesArr[moves - 1][1][1];
+    boxes[5].textContent = movesArr[moves - 1][1][2];
+    boxes[6].textContent = movesArr[moves - 1][2][0];
+    boxes[7].textContent = movesArr[moves - 1][2][1];
+    boxes[8].textContent = movesArr[moves - 1][2][2];
+  } else if (movesArr.length <= 1) {
+    boxes[0].textContent = "";
+    boxes[1].textContent = "";
+    boxes[2].textContent = "";
+    boxes[3].textContent = "";
+    boxes[4].textContent = "";
+    boxes[5].textContent = "";
+    boxes[6].textContent = "";
+    boxes[7].textContent = "";
+    boxes[8].textContent = "";
+  }
 }
 const redoUndo = document.querySelector(".redo-undo");
 const previous = document.querySelector(".replay-previous");
@@ -221,32 +237,17 @@ const redo = document.querySelector(".redo-logo");
 
 let poppedMovesArr = [];
 
-undo.addEventListener("click", () => {
+function undoMove() {
   moves--;
   changePlayer();
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
-  // boxes.forEach((box) => {
-  //   box.style.pointerEvents = "auto";
-  //   if (box.textContent !== "") {
-  //     box.style.pointerEvents = "none";
-  //   }
-  // });
-  // if (gameOver) {
-  //   if (playerTurnEl === "X") {
-  //     scoreOfO--;
-  //   } else if (playerTurnEl === "O") {
-  //     scoreOfX--;
-  //   }
-  // }
-  // xscore.textContent = `X - ${scoreOfX}`;
-  // oscore.textContent = `O - ${scoreOfO}`;
   gameOver = false;
-  if (moves === 1) {
-    undo.style.opacity = "0";
-    undo.style.pointerEvents = "none";
-  }
+  // if (moves === 1) {
+  //   undo.style.opacity = "0";
+  //   undo.style.pointerEvents = "none";
+  // }
   if (moves < movesArr.length) {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
@@ -256,16 +257,94 @@ undo.addEventListener("click", () => {
   }
   hideBanner();
   board = movesArr[moves - 1];
-  // if (movesArr > 0) {
-  // }
   movesToBoard();
   console.log(moves);
+  console.log(`this is movesArr`);
   console.log(movesArr);
+  console.log(`this is board`);
   console.log(board);
+  console.log(`This is poppedArr`);
+  console.log(poppedMovesArr);
+}
+
+undo.addEventListener("click", () => {
+  if (movesArr.length > 1) {
+    undoMove();
+  } else if (movesArr.length === 1) {
+    moves--;
+    poppedMovesArr.push(movesArr.pop());
+    movesToBoard();
+    board = [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ];
+    undo.style.opacity = "0";
+    undo.style.pointerEvents = "none";
+    console.log(moves);
+    console.log(`this is movesArr`);
+    console.log(movesArr);
+    console.log(`this is board`);
+    console.log(board);
+    console.log(`This is poppedArr`);
+    console.log(poppedMovesArr);
+  }
 });
 
-redo.addEventListener("click", () => {
+// undo.addEventListener("click", () => {
+//   moves--;
+//   changePlayer();
+//   boxes.forEach((box) => {
+//     box.style.pointerEvents = "auto";
+//   });
+//   // boxes.forEach((box) => {
+//   //   box.style.pointerEvents = "auto";
+//   //   if (box.textContent !== "") {
+//   //     box.style.pointerEvents = "none";
+//   //   }
+//   // });
+//   // if (gameOver) {
+//   //   if (playerTurnEl === "X") {
+//   //     scoreOfO--;
+//   //   } else if (playerTurnEl === "O") {
+//   //     scoreOfX--;
+//   //   }
+//   // }
+//   // xscore.textContent = `X - ${scoreOfX}`;
+//   // oscore.textContent = `O - ${scoreOfO}`;
+//   gameOver = false;
+//   if (moves === 1) {
+//     undo.style.opacity = "0";
+//     undo.style.pointerEvents = "none";
+//   }
+//   // if (moves === 1) {
+//   // undo.style.opacity = "0";
+//   // undo.style.pointerEvents = "none";
+//   // }
+//   if (moves < movesArr.length) {
+//     redo.style.opacity = "1";
+//     redo.style.pointerEvents = "auto";
+//   }
+//   if (movesArr.length > 0) {
+//     poppedMovesArr.push(movesArr.pop());
+//   }
+//   hideBanner();
+//   board = movesArr[moves - 1];
+//   // if (movesArr > 0) {
+//   // }
+//   movesToBoard();
+//   console.log(moves);
+//   console.log(`this is movesArr`);
+//   console.log(movesArr);
+//   console.log(`this is board`);
+//   console.log(board);
+//   console.log(`This is poppedArr`);
+//   console.log(poppedMovesArr);
+// });
+
+function redoMove() {
   moves++;
+  // movesToBoard();
   changePlayer();
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
@@ -278,32 +357,87 @@ redo.addEventListener("click", () => {
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
   }
-
-  if (poppedMovesArr.length < 2) {
-    redo.style.opacity = "0";
-    redo.style.pointerEvents = "none";
-  }
   if (poppedMovesArr.length > 0) {
     movesArr.push(poppedMovesArr.pop());
   }
-  // if(movesArr.length)
-  // for (let i = 0; i < board.length; i++) {
+
+  if (poppedMovesArr.length === 0) {
+    redo.style.opacity = "0";
+    redo.style.pointerEvents = "none";
+  }
   board = movesArr[moves - 1];
-  // }
   movesToBoard();
   chickenDinner();
   console.log(moves);
+  console.log(`this is movesArr`);
   console.log(movesArr);
+  console.log(`this is board`);
+  console.log(board);
+  console.log(`This is poppedArr`);
+  console.log(poppedMovesArr);
+}
+
+redo.addEventListener("click", () => {
+  if (movesArr.length >= 1) {
+    redoMove();
+  } else if (movesArr.length === 0) {
+    moves++;
+    movesArr.push(poppedMovesArr.pop());
+    movesToBoard();
+    board = [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ];
+    undo.style.opacity = "0";
+    undo.style.pointerEvents = "none";
+    console.log(moves);
+    console.log(`this is movesArr`);
+    console.log(movesArr);
+    console.log(`this is board`);
+    console.log(board);
+    console.log(`This is poppedArr`);
+    console.log(poppedMovesArr);
+  }
 });
+
+// redo.addEventListener("click", () => {
+//   movesToBoard();
+//   moves++;
+//   changePlayer();
+//   boxes.forEach((box) => {
+//     box.style.pointerEvents = "auto";
+//   });
+//   if (moves === movesArr.length) {
+//     redo.style.opacity = "0";
+//     redo.style.pointerEvents = "none";
+//   }
+//   if (moves > 1) {
+//     undo.style.opacity = "1";
+//     undo.style.pointerEvents = "auto";
+//   }
+//   if (poppedMovesArr.length > 0) {
+//     movesArr.push(poppedMovesArr.pop());
+//   }
+
+//   if (poppedMovesArr.length === 0) {
+//     redo.style.opacity = "0";
+//     redo.style.pointerEvents = "none";
+//   }
+//   // if(movesArr.length)
+//   // for (let i = 0; i < board.length; i++) {
+//     // }
+//     board = movesArr[moves - 1];
+//   chickenDinner();
+//   console.log(moves);
+//   console.log(`this is movesArr`);
+//   console.log(movesArr);
+//   console.log(`this is board`);
+//   console.log(board);
+//   console.log(`This is poppedArr`);
+//   console.log(poppedMovesArr);
+// });
 
 // FIX THE BOARD!!!!!
 
-// undo.addEventListener("click", () => {
-//   if (gameOver) {
-//     if (playerTurnEl.textContent === "X") {
-//       scoreOfX--;
-//     } else {
-//       scoreOfO--;
-//     }
-//   }
-// });
+// REDO BUTTON IF MOVESARR.LENGTH === 0  movesArr.push(poppedMovesArr.pop()) movesToBoard();

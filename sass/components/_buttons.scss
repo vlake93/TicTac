@@ -22,7 +22,7 @@
     opacity: 0;
     transition: opacity 2s;
     cursor: pointer;
-    transition: opacity 0.5s, transform 0.3s, box-shadow 0.3s;
+    transition: opacity 1s, transform 0.3s, box-shadow 0.3s;
 
     &:hover {
       transform: scale(1.1);
@@ -39,7 +39,7 @@
     margin-right: 10rem;
     opacity: 1;
     cursor: pointer;
-    transition: opacity 0.5s, transform 2s, box-shadow 0.3s, scale 0.3s;
+    transition: opacity 1s, transform 2s, box-shadow 0.3s, scale 0.3s;
 
     &:hover {
       scale: 1.1;
@@ -62,7 +62,7 @@
   &-previous {
     font-size: 4rem;
     cursor: pointer;
-    transition: all 0.5s;
+    transition: all 1s;
     text-shadow: $shadow-text-blue;
   }
 
