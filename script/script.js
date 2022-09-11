@@ -21,6 +21,7 @@ let board = [
 ];
 let moves = 0;
 let movesArr = [];
+
 function changePlayer() {
   if (playerTurnEl.textContent === "X") {
     playerTurnEl.textContent = "O";
@@ -28,10 +29,19 @@ function changePlayer() {
     playerTurnEl.textContent = "X";
   }
 }
+
 changeEl.addEventListener("click", changePlayer);
 
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
+    // if (poppedMovesArr.length > 0) {
+    //   poppedMovesArr.push(movesArr.pop());
+    // }
+    // if (moves !== movesArr.length - 1) {
+    //   // while (movesArr.length - 1 !== moves) {
+    //   //   movesArr =
+    //   // }
+    // }
     saveData(index);
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
@@ -47,9 +57,9 @@ boxes.forEach((box, index) => {
         playerTurnEl.textContent = "X";
         box.style.pointerEvents = "none";
       }
+
       redo.style.opacity = "0";
       redo.style.pointerEvents = "none";
-      poppedMovesArr = [];
       gameOver = false;
       // xscore.textContent = `X - ${scoreOfX}`;
       // oscore.textContent = `O - ${scoreOfO}`;
@@ -67,9 +77,11 @@ boxes.forEach((box, index) => {
 });
 
 const saveData = (index) => {
+  poppedMovesArr = [];
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
+  // if (poppedMovesArr.length > 0)
   movesArr.push(JSON.parse(JSON.stringify(board)));
   moves++;
 };
@@ -272,6 +284,7 @@ undo.addEventListener("click", () => {
     undoMove();
   } else if (movesArr.length === 1) {
     moves--;
+    changePlayer();
     poppedMovesArr.push(movesArr.pop());
     movesToBoard();
     board = [
@@ -349,14 +362,14 @@ function redoMove() {
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
-  if (moves === movesArr.length) {
-    redo.style.opacity = "0";
-    redo.style.pointerEvents = "none";
-  }
-  if (moves > 1) {
-    undo.style.opacity = "1";
-    undo.style.pointerEvents = "auto";
-  }
+  // if (moves === movesArr.length) {
+  //   redo.style.opacity = "0";
+  //   redo.style.pointerEvents = "none";
+  // }
+  // if (moves > 1) {
+  //   undo.style.opacity = "1";
+  //   undo.style.pointerEvents = "auto";
+  // }
   if (poppedMovesArr.length > 0) {
     movesArr.push(poppedMovesArr.pop());
   }
@@ -398,6 +411,10 @@ redo.addEventListener("click", () => {
     console.log(board);
     console.log(`This is poppedArr`);
     console.log(poppedMovesArr);
+  }
+  if (moves > 0) {
+    undo.style.opacity = "1";
+    undo.style.pointerEvents = "auto";
   }
 });
 
