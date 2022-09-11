@@ -145,11 +145,11 @@ const winnerWinner = () => {
   // scores[0](JSON.parse(JSON.stringify(scoreOfX)));
   // scores[1](JSON.parse(JSON.stringify(scoreOfO)));
   gameOver = true;
-  // if (gameOver && winner.textContent === "X") {
-  //   scoreOfX++;
-  // } else {
-  //   scoreOfO++;
-  // }
+  if (gameOver && winner.textContent === "X") {
+    scoreOfX++;
+  } else {
+    scoreOfO++;
+  }
   xscore.textContent = `X - ${scoreOfX}`;
   oscore.textContent = `O - ${scoreOfO}`;
   boxes.forEach((box) => {
@@ -255,11 +255,6 @@ function undoMove() {
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
   });
-  gameOver = false;
-  // if (moves === 1) {
-  //   undo.style.opacity = "0";
-  //   undo.style.pointerEvents = "none";
-  // }
   if (moves < movesArr.length) {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
@@ -270,6 +265,16 @@ function undoMove() {
   hideBanner();
   board = movesArr[moves - 1];
   movesToBoard();
+  if (gameOver) {
+    if (gameOver && winner.textContent === "X") {
+      scoreOfX--;
+    } else {
+      scoreOfO--;
+    }
+    xscore.textContent = `X - ${scoreOfX}`;
+    oscore.textContent = `O - ${scoreOfO}`;
+  }
+  gameOver = false;
   console.log(moves);
   console.log(`this is movesArr`);
   console.log(movesArr);
@@ -366,7 +371,7 @@ function redoMove() {
   //   redo.style.opacity = "0";
   //   redo.style.pointerEvents = "none";
   // }
-  // if (moves > 1) {
+  // if (moves >= 1) {
   //   undo.style.opacity = "1";
   //   undo.style.pointerEvents = "auto";
   // }
@@ -412,7 +417,7 @@ redo.addEventListener("click", () => {
     console.log(`This is poppedArr`);
     console.log(poppedMovesArr);
   }
-  if (moves > 0) {
+  if (moves >= 1) {
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
   }
