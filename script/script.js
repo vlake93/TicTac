@@ -34,15 +34,16 @@ changeEl.addEventListener("click", changePlayer);
 
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
+    saveData(index);
     // if (poppedMovesArr.length > 0) {
-    //   poppedMovesArr.push(movesArr.pop());
+    // poppedMovesArr.push(movesArr.pop());
+    // movesArr[moves - 1] = JSON.parse(JSON.stringify(board));
     // }
     // if (moves !== movesArr.length - 1) {
     //   // while (movesArr.length - 1 !== moves) {
     //   //   movesArr =
     //   // }
     // }
-    saveData(index);
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
     if (boxes.textContent === "X" || "O") {
@@ -251,6 +252,7 @@ let poppedMovesArr = [];
 
 function undoMove() {
   moves--;
+  board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   changePlayer();
   boxes.forEach((box) => {
     box.style.pointerEvents = "auto";
@@ -259,11 +261,10 @@ function undoMove() {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
   }
-  if (movesArr.length > 0) {
-    poppedMovesArr.push(movesArr.pop());
-  }
+  // if (movesArr.length > 0) {
+  poppedMovesArr.push(JSON.parse(JSON.stringify(movesArr.pop())));
+  // }
   hideBanner();
-  board = movesArr[moves - 1];
   movesToBoard();
   if (gameOver) {
     if (gameOver && winner.textContent === "X") {
@@ -290,7 +291,7 @@ undo.addEventListener("click", () => {
   } else if (movesArr.length === 1) {
     moves--;
     changePlayer();
-    poppedMovesArr.push(movesArr.pop());
+    poppedMovesArr.push(JSON.parse(JSON.stringify(movesArr.pop())));
     movesToBoard();
     board = [
       ["", "", ""],
@@ -375,15 +376,15 @@ function redoMove() {
   //   undo.style.opacity = "1";
   //   undo.style.pointerEvents = "auto";
   // }
-  if (poppedMovesArr.length > 0) {
-    movesArr.push(poppedMovesArr.pop());
-  }
+  // if (poppedMovesArr.length > 0) {
+  movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
+  // }
 
   if (poppedMovesArr.length === 0) {
     redo.style.opacity = "0";
     redo.style.pointerEvents = "none";
   }
-  board = movesArr[moves - 1];
+  board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   movesToBoard();
   chickenDinner();
   console.log(moves);
@@ -400,7 +401,7 @@ redo.addEventListener("click", () => {
     redoMove();
   } else if (movesArr.length === 0) {
     moves++;
-    movesArr.push(poppedMovesArr.pop());
+    movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
     movesToBoard();
     board = [
       ["", "", ""],
