@@ -21,6 +21,8 @@ let board = [
 ];
 let moves = 0;
 let movesArr = [];
+let scoreOfX = 0;
+let scoreOfO = 0;
 
 function changePlayer() {
   if (playerTurnEl.textContent === "X") {
@@ -62,8 +64,8 @@ boxes.forEach((box, index) => {
       redo.style.opacity = "0";
       redo.style.pointerEvents = "none";
       gameOver = false;
-      // xscore.textContent = `X - ${scoreOfX}`;
-      // oscore.textContent = `O - ${scoreOfO}`;
+      xscore.textContent = `X - ${scoreOfX}`;
+      oscore.textContent = `O - ${scoreOfO}`;
       // board = movesArr[moves - 1];
       console.log(moves);
       console.log(`This is movesArr`);
@@ -114,6 +116,9 @@ const chickenDinner = () => {
       board[0].indexOf("") === -1 &&
       board[1].indexOf("") === -1 &&
       board[2].indexOf("") === -1
+      // &&
+      // diagonal1.indexOf("") === -1 &&
+      // diagonal2.indexOf("") === -1
     ) {
       noWinner();
     }
@@ -122,8 +127,7 @@ const chickenDinner = () => {
 
 const xscore = document.querySelector(".x-score");
 const oscore = document.querySelector(".o-score");
-let scoreOfX = 0;
-let scoreOfO = 0;
+
 // let scores = [0, 0];
 
 xscore.textContent = `X - ${scoreOfX}`;
@@ -146,10 +150,12 @@ const winnerWinner = () => {
   // scores[0](JSON.parse(JSON.stringify(scoreOfX)));
   // scores[1](JSON.parse(JSON.stringify(scoreOfO)));
   gameOver = true;
-  if (gameOver && winner.textContent === "X") {
-    scoreOfX++;
-  } else {
-    scoreOfO++;
+  if (gameOver) {
+    if (gameOver && winner.textContent === "X") {
+      scoreOfX++;
+    } else if (gameOver && winner.textContent === "O") {
+      scoreOfO++;
+    }
   }
   xscore.textContent = `X - ${scoreOfX}`;
   oscore.textContent = `O - ${scoreOfO}`;
