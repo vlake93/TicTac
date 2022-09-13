@@ -61,14 +61,14 @@ boxes.forEach((box, index) => {
   });
 });
 
-const saveData = (index) => {
+function saveData(index) {
   poppedMovesArr = [];
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
   movesArr.push(JSON.parse(JSON.stringify(board)));
   moves++;
-};
+}
 
 function noWinner() {
   tieEl.style.opacity = "1";
@@ -79,7 +79,7 @@ function noWinner() {
   return;
 }
 
-const chickenDinner = () => {
+function chickenDinner() {
   for (let i = 0; i < 3; i++) {
     let row = board[i][0] + board[i][1] + board[i][2];
     let col = board[0][i] + board[1][i] + board[2][i];
@@ -101,7 +101,7 @@ const chickenDinner = () => {
       noWinner();
     }
   }
-};
+}
 
 const xscore = document.querySelector(".x-score");
 const oscore = document.querySelector(".o-score");
@@ -111,7 +111,7 @@ oscore.textContent = `O - ${scoreOfO}`;
 
 let gameOver = false;
 
-const winnerWinner = () => {
+function winnerWinner() {
   movesToBoard();
   if (playerTurnEl.textContent === "X") {
     winner.textContent = currentPlayer[1];
@@ -136,7 +136,7 @@ const winnerWinner = () => {
   boxes.forEach((box) => {
     box.style.pointerEvents = "none";
   });
-};
+}
 
 function hideBanner() {
   tieEl.style.opacity = "0";
@@ -225,16 +225,11 @@ const redo = document.querySelector(".redo-logo");
 let poppedMovesArr = [];
 
 function undoMove() {
+  checkBox();
   moves--;
   board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   changePlayer();
-  boxes.forEach((box) => {
-    if (box.textContent !== "") {
-      box.style.pointerEvents = "none";
-    } else {
-      box.style.pointerEvents = "auto";
-    }
-  });
+
   if (moves < movesArr.length) {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
@@ -271,15 +266,18 @@ undo.addEventListener("click", () => {
     undo.style.pointerEvents = "none";
   }
 });
-
-function redoMove() {
+function checkBox() {
   boxes.forEach((box) => {
-    if (box.textContent !== "") {
-      box.style.pointerEvents = "none";
-    } else {
+    if (box.textContent === "") {
       box.style.pointerEvents = "auto";
+    } else {
+      box.style.pointerEvents = "none";
     }
   });
+}
+
+function redoMove() {
+  checkBox();
   moves++;
   changePlayer();
   movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
