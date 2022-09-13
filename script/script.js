@@ -37,15 +37,6 @@ changeEl.addEventListener("click", changePlayer);
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
     saveData(index);
-    // if (poppedMovesArr.length > 0) {
-    // poppedMovesArr.push(movesArr.pop());
-    // movesArr[moves - 1] = JSON.parse(JSON.stringify(board));
-    // }
-    // if (moves !== movesArr.length - 1) {
-    //   // while (movesArr.length - 1 !== moves) {
-    //   //   movesArr =
-    //   // }
-    // }
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
     if (boxes.textContent === "X" || "O") {
@@ -60,20 +51,11 @@ boxes.forEach((box, index) => {
         playerTurnEl.textContent = "X";
         box.style.pointerEvents = "none";
       }
-
       redo.style.opacity = "0";
       redo.style.pointerEvents = "none";
       gameOver = false;
       xscore.textContent = `X - ${scoreOfX}`;
       oscore.textContent = `O - ${scoreOfO}`;
-      // board = movesArr[moves - 1];
-      console.log(moves);
-      console.log(`This is movesArr`);
-      console.log(movesArr);
-      console.log(`This is board`);
-      console.log(board);
-      console.log(`This is poppedArr`);
-      console.log(poppedMovesArr);
       chickenDinner();
     }
   });
@@ -84,7 +66,6 @@ const saveData = (index) => {
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
-  // if (poppedMovesArr.length > 0)
   movesArr.push(JSON.parse(JSON.stringify(board)));
   moves++;
 };
@@ -116,9 +97,6 @@ const chickenDinner = () => {
       board[0].indexOf("") === -1 &&
       board[1].indexOf("") === -1 &&
       board[2].indexOf("") === -1
-      // &&
-      // diagonal1.indexOf("") === -1 &&
-      // diagonal2.indexOf("") === -1
     ) {
       noWinner();
     }
@@ -127,8 +105,6 @@ const chickenDinner = () => {
 
 const xscore = document.querySelector(".x-score");
 const oscore = document.querySelector(".o-score");
-
-// let scores = [0, 0];
 
 xscore.textContent = `X - ${scoreOfX}`;
 oscore.textContent = `O - ${scoreOfO}`;
@@ -147,8 +123,6 @@ const winnerWinner = () => {
   winnerEl.style.opacity = "1";
   restartEl.style.opacity = "1";
   replayEl.style.opacity = "1";
-  // scores[0](JSON.parse(JSON.stringify(scoreOfX)));
-  // scores[1](JSON.parse(JSON.stringify(scoreOfO)));
   gameOver = true;
   if (gameOver) {
     if (gameOver && winner.textContent === "X") {
@@ -206,16 +180,10 @@ function movesToBoard() {
     boxes[6].textContent = movesArr[moves - 1][2][0];
     boxes[7].textContent = movesArr[moves - 1][2][1];
     boxes[8].textContent = movesArr[moves - 1][2][2];
-  } else if (movesArr.length <= 1) {
-    boxes[0].textContent = "";
-    boxes[1].textContent = "";
-    boxes[2].textContent = "";
-    boxes[3].textContent = "";
-    boxes[4].textContent = "";
-    boxes[5].textContent = "";
-    boxes[6].textContent = "";
-    boxes[7].textContent = "";
-    boxes[8].textContent = "";
+  } else if (movesArr.length <= 0) {
+    boxes.forEach((box) => {
+      box.textContent = "";
+    });
   }
 }
 const redoUndo = document.querySelector(".redo-undo");
@@ -261,15 +229,17 @@ function undoMove() {
   board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   changePlayer();
   boxes.forEach((box) => {
-    box.style.pointerEvents = "auto";
+    if (box.textContent !== "") {
+      box.style.pointerEvents = "none";
+    } else {
+      box.style.pointerEvents = "auto";
+    }
   });
   if (moves < movesArr.length) {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
   }
-  // if (movesArr.length > 0) {
   poppedMovesArr.push(JSON.parse(JSON.stringify(movesArr.pop())));
-  // }
   hideBanner();
   movesToBoard();
   if (gameOver) {
@@ -282,13 +252,6 @@ function undoMove() {
     oscore.textContent = `O - ${scoreOfO}`;
   }
   gameOver = false;
-  console.log(moves);
-  console.log(`this is movesArr`);
-  console.log(movesArr);
-  console.log(`this is board`);
-  console.log(board);
-  console.log(`This is poppedArr`);
-  console.log(poppedMovesArr);
 }
 
 undo.addEventListener("click", () => {
@@ -306,100 +269,29 @@ undo.addEventListener("click", () => {
     ];
     undo.style.opacity = "0";
     undo.style.pointerEvents = "none";
-    console.log(moves);
-    console.log(`this is movesArr`);
-    console.log(movesArr);
-    console.log(`this is board`);
-    console.log(board);
-    console.log(`This is poppedArr`);
-    console.log(poppedMovesArr);
   }
 });
 
-// undo.addEventListener("click", () => {
-//   moves--;
-//   changePlayer();
-//   boxes.forEach((box) => {
-//     box.style.pointerEvents = "auto";
-//   });
-//   // boxes.forEach((box) => {
-//   //   box.style.pointerEvents = "auto";
-//   //   if (box.textContent !== "") {
-//   //     box.style.pointerEvents = "none";
-//   //   }
-//   // });
-//   // if (gameOver) {
-//   //   if (playerTurnEl === "X") {
-//   //     scoreOfO--;
-//   //   } else if (playerTurnEl === "O") {
-//   //     scoreOfX--;
-//   //   }
-//   // }
-//   // xscore.textContent = `X - ${scoreOfX}`;
-//   // oscore.textContent = `O - ${scoreOfO}`;
-//   gameOver = false;
-//   if (moves === 1) {
-//     undo.style.opacity = "0";
-//     undo.style.pointerEvents = "none";
-//   }
-//   // if (moves === 1) {
-//   // undo.style.opacity = "0";
-//   // undo.style.pointerEvents = "none";
-//   // }
-//   if (moves < movesArr.length) {
-//     redo.style.opacity = "1";
-//     redo.style.pointerEvents = "auto";
-//   }
-//   if (movesArr.length > 0) {
-//     poppedMovesArr.push(movesArr.pop());
-//   }
-//   hideBanner();
-//   board = movesArr[moves - 1];
-//   // if (movesArr > 0) {
-//   // }
-//   movesToBoard();
-//   console.log(moves);
-//   console.log(`this is movesArr`);
-//   console.log(movesArr);
-//   console.log(`this is board`);
-//   console.log(board);
-//   console.log(`This is poppedArr`);
-//   console.log(poppedMovesArr);
-// });
-
 function redoMove() {
-  moves++;
-  // movesToBoard();
-  changePlayer();
   boxes.forEach((box) => {
-    box.style.pointerEvents = "auto";
+    if (box.textContent !== "") {
+      box.style.pointerEvents = "none";
+    } else {
+      box.style.pointerEvents = "auto";
+    }
   });
-  // if (moves === movesArr.length) {
-  //   redo.style.opacity = "0";
-  //   redo.style.pointerEvents = "none";
-  // }
-  // if (moves >= 1) {
-  //   undo.style.opacity = "1";
-  //   undo.style.pointerEvents = "auto";
-  // }
-  // if (poppedMovesArr.length > 0) {
+  moves++;
+  changePlayer();
   movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
-  // }
 
   if (poppedMovesArr.length === 0) {
     redo.style.opacity = "0";
     redo.style.pointerEvents = "none";
   }
+
   board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   movesToBoard();
   chickenDinner();
-  console.log(moves);
-  console.log(`this is movesArr`);
-  console.log(movesArr);
-  console.log(`this is board`);
-  console.log(board);
-  console.log(`This is poppedArr`);
-  console.log(poppedMovesArr);
 }
 
 redo.addEventListener("click", () => {
@@ -416,57 +308,9 @@ redo.addEventListener("click", () => {
     ];
     undo.style.opacity = "0";
     undo.style.pointerEvents = "none";
-    console.log(moves);
-    console.log(`this is movesArr`);
-    console.log(movesArr);
-    console.log(`this is board`);
-    console.log(board);
-    console.log(`This is poppedArr`);
-    console.log(poppedMovesArr);
   }
   if (moves >= 1) {
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
   }
 });
-
-// redo.addEventListener("click", () => {
-//   movesToBoard();
-//   moves++;
-//   changePlayer();
-//   boxes.forEach((box) => {
-//     box.style.pointerEvents = "auto";
-//   });
-//   if (moves === movesArr.length) {
-//     redo.style.opacity = "0";
-//     redo.style.pointerEvents = "none";
-//   }
-//   if (moves > 1) {
-//     undo.style.opacity = "1";
-//     undo.style.pointerEvents = "auto";
-//   }
-//   if (poppedMovesArr.length > 0) {
-//     movesArr.push(poppedMovesArr.pop());
-//   }
-
-//   if (poppedMovesArr.length === 0) {
-//     redo.style.opacity = "0";
-//     redo.style.pointerEvents = "none";
-//   }
-//   // if(movesArr.length)
-//   // for (let i = 0; i < board.length; i++) {
-//     // }
-//     board = movesArr[moves - 1];
-//   chickenDinner();
-//   console.log(moves);
-//   console.log(`this is movesArr`);
-//   console.log(movesArr);
-//   console.log(`this is board`);
-//   console.log(board);
-//   console.log(`This is poppedArr`);
-//   console.log(poppedMovesArr);
-// });
-
-// FIX THE BOARD!!!!!
-
-// REDO BUTTON IF MOVESARR.LENGTH === 0  movesArr.push(poppedMovesArr.pop()) movesToBoard();
