@@ -39,7 +39,7 @@ boxes.forEach((box, index) => {
     saveData(index);
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
-    if (boxes.textContent === "X" || "O") {
+    if (boxes.textContent !== "") {
       changeEl.style.opacity = "0";
       changeEl.style.pointerEvents = "none";
       if (playerTurnEl.textContent === "X" && box.textContent === "") {
@@ -57,6 +57,7 @@ boxes.forEach((box, index) => {
       xscore.textContent = `X - ${scoreOfX}`;
       oscore.textContent = `O - ${scoreOfO}`;
       chickenDinner();
+      console.log(winner.textContent);
     }
   });
 });
@@ -85,9 +86,9 @@ function chickenDinner() {
     let col = board[0][i] + board[1][i] + board[2][i];
     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
-    if (diagonal1 === "XXX" || diagonal2 === "XXX") {
+    if (diagonal1 === "XXX" || diagonal1 === "OOO") {
       winnerWinner();
-    } else if (diagonal1 === "OOO" || diagonal2 === "OOO") {
+    } else if (diagonal2 === "XXX" || diagonal2 === "OOO") {
       winnerWinner();
     } else if (row === "XXX" || col === "XXX") {
       winnerWinner();
@@ -112,7 +113,7 @@ oscore.textContent = `O - ${scoreOfO}`;
 let gameOver = false;
 
 function winnerWinner() {
-  movesToBoard();
+  // movesToBoard();
   if (playerTurnEl.textContent === "X") {
     winner.textContent = currentPlayer[1];
   } else if (playerTurnEl.textContent === "O") {
@@ -125,9 +126,9 @@ function winnerWinner() {
   replayEl.style.opacity = "1";
   gameOver = true;
   if (gameOver) {
-    if (gameOver && winner.textContent === "X") {
+    if (winner.textContent === "X") {
       scoreOfX++;
-    } else if (gameOver && winner.textContent === "O") {
+    } else if (winner.textContent === "O") {
       scoreOfO++;
     }
   }
@@ -171,6 +172,16 @@ restartEl.addEventListener("click", restart);
 
 function movesToBoard() {
   if (movesArr.length > 0) {
+    // for (let i = 0; i < boxes.length - 1; i++) {
+    //   for (let j = 0; j < 3; j++) {
+    //     boxes[i].textContent = movesArr[moves - 1][j][j];
+    //   }
+    // }
+    // let j = 0;
+    // for (let i = 0; i < boxes.length; i++) {
+    //   if ((i + 1) % 3 === 0) j++;
+    //   boxes[i].textContent = movesArr[moves - 1][j][(i + 3) % 3];
+    // }
     boxes[0].textContent = movesArr[moves - 1][0][0];
     boxes[1].textContent = movesArr[moves - 1][0][1];
     boxes[2].textContent = movesArr[moves - 1][0][2];
@@ -225,7 +236,6 @@ const redo = document.querySelector(".redo-logo");
 let poppedMovesArr = [];
 
 function undoMove() {
-  checkBox();
   moves--;
   board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   changePlayer();
@@ -237,6 +247,11 @@ function undoMove() {
   poppedMovesArr.push(JSON.parse(JSON.stringify(movesArr.pop())));
   hideBanner();
   movesToBoard();
+  boxes.forEach((box) => {
+    if (box.textContent === "") {
+      box.style.pointerEvents = "auto";
+    }
+  });
   if (gameOver) {
     if (gameOver && winner.textContent === "X") {
       scoreOfX--;
@@ -275,9 +290,9 @@ function checkBox() {
     }
   });
 }
+checkBox();
 
 function redoMove() {
-  checkBox();
   moves++;
   changePlayer();
   movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
@@ -290,6 +305,11 @@ function redoMove() {
   board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   movesToBoard();
   chickenDinner();
+  boxes.forEach((box) => {
+    if (box.textContent !== "") {
+      box.style.pointerEvents = "none";
+    }
+  });
 }
 
 redo.addEventListener("click", () => {
