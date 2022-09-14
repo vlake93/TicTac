@@ -88,11 +88,11 @@ function chickenDinner() {
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
     if (diagonal1 === "XXX" || diagonal1 === "OOO") {
       winnerWinner();
-    } else if (diagonal2 === "XXX" || diagonal2 === "OOO") {
-      winnerWinner();
     } else if (row === "XXX" || col === "XXX") {
       winnerWinner();
     } else if (row === "OOO" || col === "OOO") {
+      winnerWinner();
+    } else if (diagonal2 === "XXX" || diagonal2 === "OOO") {
       winnerWinner();
     } else if (
       board[0].indexOf("") === -1 &&
@@ -113,7 +113,6 @@ oscore.textContent = `O - ${scoreOfO}`;
 let gameOver = false;
 
 function winnerWinner() {
-  // movesToBoard();
   if (playerTurnEl.textContent === "X") {
     winner.textContent = currentPlayer[1];
   } else if (playerTurnEl.textContent === "O") {
@@ -272,6 +271,11 @@ undo.addEventListener("click", () => {
     changePlayer();
     poppedMovesArr.push(JSON.parse(JSON.stringify(movesArr.pop())));
     movesToBoard();
+    boxes.forEach((box) => {
+      if (box.textContent === "") {
+        box.style.pointerEvents = "auto";
+      }
+    });
     board = [
       ["", "", ""],
       ["", "", ""],
@@ -281,6 +285,7 @@ undo.addEventListener("click", () => {
     undo.style.pointerEvents = "none";
   }
 });
+
 function checkBox() {
   boxes.forEach((box) => {
     if (box.textContent === "") {
@@ -294,6 +299,10 @@ checkBox();
 
 function redoMove() {
   moves++;
+  if (moves >= 1) {
+    undo.style.opacity = "1";
+    undo.style.pointerEvents = "auto";
+  }
   changePlayer();
   movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
 
@@ -311,24 +320,25 @@ function redoMove() {
     }
   });
 }
+redo.addEventListener("click", redoMove);
 
-redo.addEventListener("click", () => {
-  if (movesArr.length >= 1) {
-    redoMove();
-  } else if (movesArr.length === 0) {
-    moves++;
-    movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
-    movesToBoard();
-    board = [
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""],
-    ];
-    undo.style.opacity = "0";
-    undo.style.pointerEvents = "none";
-  }
-  if (moves >= 1) {
-    undo.style.opacity = "1";
-    undo.style.pointerEvents = "auto";
-  }
-});
+// redo.addEventListener("click", () => {
+//   if (movesArr.length >= 1) {
+//     redoMove();
+//   } else if (movesArr.length === 0) {
+//     moves++;
+//     movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
+//     movesToBoard();
+//     board = [
+//       ["", "", ""],
+//       ["", "", ""],
+//       ["", "", ""],
+//     ];
+//     undo.style.opacity = "0";
+//     undo.style.pointerEvents = "none";
+//   }
+//   if (moves >= 1) {
+//     undo.style.opacity = "1";
+//     undo.style.pointerEvents = "auto";
+//   }
+// });
