@@ -7,22 +7,30 @@ const winnerEl = document.querySelector(".winner-win");
 const tieEl = document.querySelector(".winner-draw");
 const winner = document.querySelector(".winner-player");
 const buttons = document.querySelector(".button");
-const changeEl = document.querySelector(".button-change");
+const changePlayerBtn = document.querySelector(".button-change");
 const restartEl = document.querySelector(".button-restart");
 const replayEl = document.querySelector(".replay");
 const nextEl = document.querySelector(".replay-next");
 const previousEl = document.querySelector(".replay-previous");
+const xscore = document.querySelector(".x-score");
+const oscore = document.querySelector(".o-score");
+const redoUndo = document.querySelector(".redo-undo");
+const previous = document.querySelector(".replay-previous");
+const next = document.querySelector(".replay-next");
+const undo = document.querySelector(".undo-logo");
+const redo = document.querySelector(".redo-logo");
 
-let currentPlayer = ["X", "O"];
 let board = [
   ["", "", ""],
   ["", "", ""],
   ["", "", ""],
 ];
+let gameOver = false;
 let moves = 0;
 let movesArr = [];
 let scoreOfX = 0;
 let scoreOfO = 0;
+let poppedMovesArr = [];
 
 function changePlayer() {
   if (playerTurnEl.textContent === "X") {
@@ -32,7 +40,7 @@ function changePlayer() {
   }
 }
 
-changeEl.addEventListener("click", changePlayer);
+changePlayerBtn.addEventListener("click", changePlayer);
 
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
@@ -40,8 +48,8 @@ boxes.forEach((box, index) => {
     undo.style.opacity = "1";
     undo.style.pointerEvents = "auto";
     if (boxes.textContent !== "") {
-      changeEl.style.opacity = "0";
-      changeEl.style.pointerEvents = "none";
+      changePlayerBtn.style.opacity = "0";
+      changePlayerBtn.style.pointerEvents = "none";
       if (playerTurnEl.textContent === "X" && box.textContent === "") {
         box.textContent = "X";
         playerTurnEl.textContent = "O";
@@ -56,7 +64,7 @@ boxes.forEach((box, index) => {
       gameOver = false;
       xscore.textContent = `X - ${scoreOfX}`;
       oscore.textContent = `O - ${scoreOfO}`;
-      chickenDinner();
+      checkWinner();
       console.log(winner.textContent);
     }
   });
@@ -76,24 +84,25 @@ function noWinner() {
   tieEl.style.fontSize = "6rem";
   restartEl.style.opacity = "1";
   replayEl.style.opacity = "1";
-  console.log("It's a tie");
   return;
 }
 
-function chickenDinner() {
+function checkWinner() {
   for (let i = 0; i < 3; i++) {
     let row = board[i][0] + board[i][1] + board[i][2];
     let col = board[0][i] + board[1][i] + board[2][i];
     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
-    if (diagonal1 === "XXX" || diagonal1 === "OOO") {
-      winnerWinner();
-    } else if (row === "XXX" || col === "XXX") {
-      winnerWinner();
+    if (row === "XXX" || col === "XXX") {
+      declareWinner();
+    } else if (diagonal1 === "XXX" || diagonal1 === "OOO") {
+      declareWinner();
+      return;
     } else if (row === "OOO" || col === "OOO") {
-      winnerWinner();
+      declareWinner();
     } else if (diagonal2 === "XXX" || diagonal2 === "OOO") {
-      winnerWinner();
+      declareWinner();
+      return;
     } else if (
       board[0].indexOf("") === -1 &&
       board[1].indexOf("") === -1 &&
@@ -104,21 +113,15 @@ function chickenDinner() {
   }
 }
 
-const xscore = document.querySelector(".x-score");
-const oscore = document.querySelector(".o-score");
-
 xscore.textContent = `X - ${scoreOfX}`;
 oscore.textContent = `O - ${scoreOfO}`;
 
-let gameOver = false;
-
-function winnerWinner() {
+function declareWinner() {
   if (playerTurnEl.textContent === "X") {
-    winner.textContent = currentPlayer[1];
+    winner.textContent = "O";
   } else if (playerTurnEl.textContent === "O") {
-    winner.textContent = currentPlayer[0];
+    winner.textContent = "X";
   }
-
   winnerEl.style.fontSize = "6rem";
   winnerEl.style.opacity = "1";
   restartEl.style.opacity = "1";
@@ -130,12 +133,13 @@ function winnerWinner() {
     } else if (winner.textContent === "O") {
       scoreOfO++;
     }
+    xscore.textContent = `X - ${scoreOfX}`;
+    oscore.textContent = `O - ${scoreOfO}`;
   }
-  xscore.textContent = `X - ${scoreOfX}`;
-  oscore.textContent = `O - ${scoreOfO}`;
   boxes.forEach((box) => {
     box.style.pointerEvents = "none";
   });
+  return;
 }
 
 function hideBanner() {
@@ -158,8 +162,8 @@ const restart = () => {
   redoUndo.style.opacity = "1";
   gameContainer.style.pointerEvents = "auto";
   hideBanner();
-  changeEl.style.opacity = "1";
-  changeEl.style.pointerEvents = "auto";
+  changePlayerBtn.style.opacity = "1";
+  changePlayerBtn.style.pointerEvents = "auto";
   boxes.forEach((box) => {
     box.textContent = "";
     box.style.pointerEvents = "auto";
@@ -181,6 +185,13 @@ function movesToBoard() {
     //   if ((i + 1) % 3 === 0) j++;
     //   boxes[i].textContent = movesArr[moves - 1][j][(i + 3) % 3];
     // }
+    // for (let i = 0; i < 9; i++) {
+    //   for (let j = 0; j < 3; j++) {
+    //     for (let k = 0; k < 3; j++) {
+    //       boxes[i].textContent = movesArr[moves - 1][j][k];
+    //     }
+    //   }
+    // }
     boxes[0].textContent = movesArr[moves - 1][0][0];
     boxes[1].textContent = movesArr[moves - 1][0][1];
     boxes[2].textContent = movesArr[moves - 1][0][2];
@@ -196,9 +207,6 @@ function movesToBoard() {
     });
   }
 }
-const redoUndo = document.querySelector(".redo-undo");
-const previous = document.querySelector(".replay-previous");
-const next = document.querySelector(".replay-next");
 
 previous.addEventListener("click", () => {
   next.style.opacity = "1";
@@ -229,17 +237,12 @@ next.addEventListener("click", () => {
   movesToBoard();
 });
 
-const undo = document.querySelector(".undo-logo");
-const redo = document.querySelector(".redo-logo");
-
-let poppedMovesArr = [];
-
 function undoMove() {
   moves--;
   board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   changePlayer();
 
-  if (moves < movesArr.length) {
+  if (moves <= movesArr.length) {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
   }
@@ -313,7 +316,7 @@ function redoMove() {
 
   board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
   movesToBoard();
-  chickenDinner();
+  checkWinner();
   boxes.forEach((box) => {
     if (box.textContent !== "") {
       box.style.pointerEvents = "none";
