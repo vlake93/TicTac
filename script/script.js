@@ -65,7 +65,6 @@ boxes.forEach((box, index) => {
       xscore.textContent = `X - ${scoreOfX}`;
       oscore.textContent = `O - ${scoreOfO}`;
       checkWinner();
-      console.log(winner.textContent);
     }
   });
 });
@@ -95,11 +94,13 @@ function checkWinner() {
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
     if (row === "XXX" || col === "XXX") {
       declareWinner();
+      return;
     } else if (diagonal1 === "XXX" || diagonal1 === "OOO") {
       declareWinner();
       return;
     } else if (row === "OOO" || col === "OOO") {
       declareWinner();
+      return;
     } else if (diagonal2 === "XXX" || diagonal2 === "OOO") {
       declareWinner();
       return;
@@ -109,6 +110,7 @@ function checkWinner() {
       board[2].indexOf("") === -1
     ) {
       noWinner();
+      return;
     }
   }
 }
@@ -192,6 +194,14 @@ function movesToBoard() {
     //     }
     //   }
     // }
+    // [boxes[0].textContent, boxes[0].textContent, boxes[2].textContent] =
+    //   movesArr[moves - 1][0][
+    //     (boxes[3].textContent, boxes[4].textContent, boxes[5].textContent)
+    //   ] =
+    //   movesArr[moves - 1][1][
+    //     (boxes[6].textContent, boxes[7].textContent, boxes[8].textContent)
+    //   ] =
+    //     movesArr[moves - 1][2];
     boxes[0].textContent = movesArr[moves - 1][0][0];
     boxes[1].textContent = movesArr[moves - 1][0][1];
     boxes[2].textContent = movesArr[moves - 1][0][2];
