@@ -86,22 +86,50 @@ function noWinner() {
   return;
 }
 
+// function checkWinner() {
+//   for (let i = 0; i < 3; i++) {
+//     let row = board[i][0] + board[i][1] + board[i][2];
+//     let col = board[0][i] + board[1][i] + board[2][i];
+//     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
+//     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
+//     if (row === "XXX" || col === "XXX") {
+//       declareWinner();
+//       return;
+//     } else if (diagonal1 === "XXX" || diagonal1 === "OOO") {
+//       declareWinner();
+//       return;
+//     } else if (row === "OOO" || col === "OOO") {
+//       declareWinner();
+//       return;
+//     } else if (diagonal2 === "XXX" || diagonal2 === "OOO") {
+//       declareWinner();
+//       return;
+//     } else if (
+//       board[0].indexOf("") === -1 &&
+//       board[1].indexOf("") === -1 &&
+//       board[2].indexOf("") === -1
+//     ) {
+//       noWinner();
+//       return;
+//     }
+//   }
+// }
+
 function checkWinner() {
   for (let i = 0; i < 3; i++) {
     let row = board[i][0] + board[i][1] + board[i][2];
     let col = board[0][i] + board[1][i] + board[2][i];
     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
-    if (row === "XXX" || col === "XXX") {
+    if (row === "XXX" || row === "OOO" || col === "XXX" || col === "OOO") {
       declareWinner();
       return;
-    } else if (diagonal1 === "XXX" || diagonal1 === "OOO") {
-      declareWinner();
-      return;
-    } else if (row === "OOO" || col === "OOO") {
-      declareWinner();
-      return;
-    } else if (diagonal2 === "XXX" || diagonal2 === "OOO") {
+    } else if (
+      diagonal1 === "XXX" ||
+      diagonal1 === "OOO" ||
+      diagonal2 === "XXX" ||
+      diagonal2 === "OOO"
+    ) {
       declareWinner();
       return;
     } else if (
@@ -334,24 +362,3 @@ function redoMove() {
   });
 }
 redo.addEventListener("click", redoMove);
-
-// redo.addEventListener("click", () => {
-//   if (movesArr.length >= 1) {
-//     redoMove();
-//   } else if (movesArr.length === 0) {
-//     moves++;
-//     movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
-//     movesToBoard();
-//     board = [
-//       ["", "", ""],
-//       ["", "", ""],
-//       ["", "", ""],
-//     ];
-//     undo.style.opacity = "0";
-//     undo.style.pointerEvents = "none";
-//   }
-//   if (moves >= 1) {
-//     undo.style.opacity = "1";
-//     undo.style.pointerEvents = "auto";
-//   }
-// });
