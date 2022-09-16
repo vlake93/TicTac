@@ -121,6 +121,7 @@ function checkWinner() {
     let col = board[0][i] + board[1][i] + board[2][i];
     let diagonal1 = board[0][0] + board[1][1] + board[2][2];
     let diagonal2 = board[0][2] + board[1][1] + board[2][0];
+
     if (row === "XXX" || row === "OOO" || col === "XXX" || col === "OOO") {
       declareWinner();
       return;
@@ -210,11 +211,13 @@ function movesToBoard() {
     //     boxes[i].textContent = movesArr[moves - 1][j][j];
     //   }
     // }
+    //
     // let j = 0;
     // for (let i = 0; i < boxes.length; i++) {
     //   if ((i + 1) % 3 === 0) j++;
     //   boxes[i].textContent = movesArr[moves - 1][j][(i + 3) % 3];
     // }
+    //
     // for (let i = 0; i < 9; i++) {
     //   for (let j = 0; j < 3; j++) {
     //     for (let k = 0; k < 3; j++) {
@@ -222,6 +225,7 @@ function movesToBoard() {
     //     }
     //   }
     // }
+    //
     // [boxes[0].textContent, boxes[0].textContent, boxes[2].textContent] =
     //   movesArr[moves - 1][0][
     //     (boxes[3].textContent, boxes[4].textContent, boxes[5].textContent)
@@ -230,6 +234,15 @@ function movesToBoard() {
     //     (boxes[6].textContent, boxes[7].textContent, boxes[8].textContent)
     //   ] =
     //     movesArr[moves - 1][2];
+    //
+    // boxes.textContent = movesArr[moves - 1];
+    //
+    // boxes.forEach((box) => {
+    //   movesArr[moves - 1].forEach((array) => {
+    //     box.textContent = array.textContent;
+    //   });
+    // });
+    //
     boxes[0].textContent = movesArr[moves - 1][0][0];
     boxes[1].textContent = movesArr[moves - 1][0][1];
     boxes[2].textContent = movesArr[moves - 1][0][2];
