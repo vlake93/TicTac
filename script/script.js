@@ -27,10 +27,10 @@ let board = [
 ];
 let gameOver = false;
 let moves = 0;
-let movesArr = [];
+let movesList = [];
 let scoreOfX = 0;
 let scoreOfO = 0;
-let poppedMovesArr = [];
+let poppedmovesList = [];
 
 function changePlayer() {
   if (playerTurnEl.textContent === "X") {
@@ -70,11 +70,11 @@ boxes.forEach((box, index) => {
 });
 
 function saveData(index) {
-  poppedMovesArr = [];
+  poppedmovesList = [];
   let col = index % 3;
   let row = (index - col) / 3;
   board[row][col] = playerTurnEl.textContent;
-  movesArr.push(JSON.parse(JSON.stringify(board)));
+  movesList.push(JSON.parse(JSON.stringify(board)));
   moves++;
 }
 
@@ -189,7 +189,7 @@ const restart = () => {
     ["", "", ""],
   ];
   moves = 0;
-  movesArr = [];
+  movesList = [];
   redoUndo.style.opacity = "1";
   gameContainer.style.pointerEvents = "auto";
   hideBanner();
@@ -205,54 +205,54 @@ const restart = () => {
 restartEl.addEventListener("click", restart);
 
 function movesToBoard() {
-  if (movesArr.length > 0) {
+  if (movesList.length > 0) {
     // for (let i = 0; i < boxes.length - 1; i++) {
     //   for (let j = 0; j < 3; j++) {
-    //     boxes[i].textContent = movesArr[moves - 1][j][j];
+    //     boxes[i].textContent = movesList[moves - 1][j][j];
     //   }
     // }
     //
     // let j = 0;
     // for (let i = 0; i < boxes.length; i++) {
     //   if ((i + 1) % 3 === 0) j++;
-    //   boxes[i].textContent = movesArr[moves - 1][j][(i + 3) % 3];
+    //   boxes[i].textContent = movesList[moves - 1][j][(i + 3) % 3];
     // }
     //
     // for (let i = 0; i < 9; i++) {
     //   for (let j = 0; j < 3; j++) {
     //     for (let k = 0; k < 3; j++) {
-    //       boxes[i].textContent = movesArr[moves - 1][j][k];
+    //       boxes[i].textContent = movesList[moves - 1][j][k];
     //     }
     //   }
     // }
     //
     // [boxes[0].textContent, boxes[0].textContent, boxes[2].textContent] =
-    //   movesArr[moves - 1][0][
+    //   movesList[moves - 1][0][
     //     (boxes[3].textContent, boxes[4].textContent, boxes[5].textContent)
     //   ] =
-    //   movesArr[moves - 1][1][
+    //   movesList[moves - 1][1][
     //     (boxes[6].textContent, boxes[7].textContent, boxes[8].textContent)
     //   ] =
-    //     movesArr[moves - 1][2];
+    //     movesList[moves - 1][2];
     //
-    // boxes.textContent = movesArr[moves - 1];
+    // boxes.textContent = movesList[moves - 1];
     //
     // boxes.forEach((box) => {
-    //   movesArr[moves - 1].forEach((array) => {
+    //   movesList[moves - 1].forEach((array) => {
     //     box.textContent = array.textContent;
     //   });
     // });
     //
-    boxes[0].textContent = movesArr[moves - 1][0][0];
-    boxes[1].textContent = movesArr[moves - 1][0][1];
-    boxes[2].textContent = movesArr[moves - 1][0][2];
-    boxes[3].textContent = movesArr[moves - 1][1][0];
-    boxes[4].textContent = movesArr[moves - 1][1][1];
-    boxes[5].textContent = movesArr[moves - 1][1][2];
-    boxes[6].textContent = movesArr[moves - 1][2][0];
-    boxes[7].textContent = movesArr[moves - 1][2][1];
-    boxes[8].textContent = movesArr[moves - 1][2][2];
-  } else if (movesArr.length <= 0) {
+    boxes[0].textContent = movesList[moves - 1][0][0];
+    boxes[1].textContent = movesList[moves - 1][0][1];
+    boxes[2].textContent = movesList[moves - 1][0][2];
+    boxes[3].textContent = movesList[moves - 1][1][0];
+    boxes[4].textContent = movesList[moves - 1][1][1];
+    boxes[5].textContent = movesList[moves - 1][1][2];
+    boxes[6].textContent = movesList[moves - 1][2][0];
+    boxes[7].textContent = movesList[moves - 1][2][1];
+    boxes[8].textContent = movesList[moves - 1][2][2];
+  } else if (movesList.length <= 0) {
     boxes.forEach((box) => {
       box.textContent = "";
     });
@@ -266,7 +266,7 @@ previous.addEventListener("click", () => {
     previous.style.opacity = "0";
     previous.style.pointerEvents = "none";
   }
-  if (moves < movesArr.length) {
+  if (moves < movesList.length) {
     next.style.opacity = "1";
     next.style.pointerEvents = "auto";
   }
@@ -277,7 +277,7 @@ previous.addEventListener("click", () => {
 
 next.addEventListener("click", () => {
   moves++;
-  if (moves === movesArr.length) {
+  if (moves === movesList.length) {
     next.style.opacity = "0";
     next.style.pointerEvents = "none";
   }
@@ -290,14 +290,14 @@ next.addEventListener("click", () => {
 
 function undoMove() {
   moves--;
-  board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
+  board = JSON.parse(JSON.stringify(movesList[moves - 1]));
   changePlayer();
 
-  if (moves <= movesArr.length) {
+  if (moves <= movesList.length) {
     redo.style.opacity = "1";
     redo.style.pointerEvents = "auto";
   }
-  poppedMovesArr.push(JSON.parse(JSON.stringify(movesArr.pop())));
+  poppedmovesList.push(JSON.parse(JSON.stringify(movesList.pop())));
   hideBanner();
   movesToBoard();
   boxes.forEach((box) => {
@@ -318,12 +318,12 @@ function undoMove() {
 }
 
 undo.addEventListener("click", () => {
-  if (movesArr.length > 1) {
+  if (movesList.length > 1) {
     undoMove();
-  } else if (movesArr.length === 1) {
+  } else if (movesList.length === 1) {
     moves--;
     changePlayer();
-    poppedMovesArr.push(JSON.parse(JSON.stringify(movesArr.pop())));
+    poppedmovesList.push(JSON.parse(JSON.stringify(movesList.pop())));
     movesToBoard();
     boxes.forEach((box) => {
       if (box.textContent === "") {
@@ -358,14 +358,14 @@ function redoMove() {
     undo.style.pointerEvents = "auto";
   }
   changePlayer();
-  movesArr.push(JSON.parse(JSON.stringify(poppedMovesArr.pop())));
+  movesList.push(JSON.parse(JSON.stringify(poppedmovesList.pop())));
 
-  if (poppedMovesArr.length === 0) {
+  if (poppedmovesList.length === 0) {
     redo.style.opacity = "0";
     redo.style.pointerEvents = "none";
   }
 
-  board = JSON.parse(JSON.stringify(movesArr[moves - 1]));
+  board = JSON.parse(JSON.stringify(movesList[moves - 1]));
   movesToBoard();
   checkWinner();
   boxes.forEach((box) => {
